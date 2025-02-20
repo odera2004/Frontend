@@ -4,6 +4,7 @@ import paintingImage from "../assets/painting.jpg";
 import engineImage from "../assets/engine.jpg";
 import tireImage from "../assets/tire.jpg";
 import brakeImage from "../assets/brake.jpg";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Home() {
   const services = [
@@ -14,15 +15,15 @@ function Home() {
   ];
 
   return (
-    <div className="home-container">
+    <div className="container">
       {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-image-container">
-          <img src={carImage} alt="Car" className="hero-image" />
+      <section className="row align-items-center my-5">
+        <div className="col-md-6 text-center">
+          <img src={carImage} alt="Car" className="img-fluid rounded shadow" />
         </div>
-        <div className="hero-text">
-          <h1>Welcome Jane</h1>
-          <p>
+        <div className="col-md-6 text-center text-md-start">
+          <h1 className="fw-bold">Welcome</h1>
+          <p className="lead">
             Welcome to <strong>Auto Fix Hub</strong>, where your car gets the attention it deserves! 
             Whether it's a quick fix, a full service, or a custom upgrade, we've got you covered.
             <br /> Drive in, relax, and let us take care of the rest!
@@ -30,29 +31,18 @@ function Home() {
         </div>
       </section>
 
-      {/* Cards Section - Arranged in Two Rows */}
-      <section className="cards-container">
-        <div className="card-row">
-          {services.slice(0, 2).map((service, index) => (
-            <div key={index} className="card">
-              <img src={service.img} alt={service.title} className="card-image" />
-              <div className="card-text">
-                <h2>{service.title}</h2>
-                <p>{service.desc}</p>
-                <button>Learn More</button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="card-row">
-          {services.slice(2, 4).map((service, index) => (
-            <div key={index} className="card">
-              <img src={service.img} alt={service.title} className="card-image" />
-              <div className="card-text">
-                <h2>{service.title}</h2>
-                <p>{service.desc}</p>
-                <button>Learn More</button>
+      {/* Services Section - Bootstrap Cards */}
+      <section className="my-5">
+        <div className="row g-4">
+          {services.map((service, index) => (
+            <div key={index} className="col-md-6">
+              <div className="card h-100 shadow border-0">
+                <img src={service.img} alt={service.title} className="card-img-top" />
+                <div className="card-body text-center">
+                  <h5 className="card-title fw-bold">{service.title}</h5>
+                  <p className="card-text">{service.desc}</p>
+                  <button className="btn btn-primary">Learn More</button>
+                </div>
               </div>
             </div>
           ))}
@@ -60,8 +50,8 @@ function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <p>Garage Automation &copy; 2025</p>
+      <footer className="bg-dark text-white text-center py-3 mt-5">
+        <p className="mb-0">Garage Automation &copy; 2025</p>
       </footer>
     </div>
   );

@@ -1,4 +1,4 @@
-
+/* General Page Styling */
 .page-container {
   min-height: 100vh;
   display: flex;
@@ -95,9 +95,8 @@
   line-height: 1.5;
 }
 
-
+/* Login Container */
 .login-container {
-  
   background: #50555c;
   padding: 40px;
   border-radius: 10px;
@@ -112,13 +111,14 @@
   margin-bottom: 20px;
 }
 
+/* Form Styling */
 .input-group {
   display: flex;
   flex-direction: column; 
   gap: 15px;
 }
 
-input {
+input.form-control {
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -126,7 +126,8 @@ input {
   width: 100%;
 }
 
-button {
+/* Button Styling */
+.btn-primary {
   background: #f8c20e;
   color: #222;
   border: none;
@@ -138,6 +139,6 @@ button {
   width: 100%; 
 }
 
-button:hover {
+.btn-primary:hover {
   background: #d9a90f;
 }

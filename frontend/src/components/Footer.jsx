@@ -1,68 +1,82 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaPhoneAlt } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { SiYoutube } from "react-icons/si";
 import { RiLinkedinBoxFill } from "react-icons/ri";
 import { MdOutlineMail } from "react-icons/md";
-import { FaPhoneAlt } from "react-icons/fa";
-import "./Footer.css"; 
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-content">
-        {/* Quick Links Section */}
-        <div className="footer-section quick-links">
-          <h3>QUICK LINKS</h3>
-          <ul>
-            <li>
-              <Link to="/x"><BsTwitterX /></Link>
-            </li>
-            <li>
-              <Link to="/instagram"><FaInstagram /></Link>
-            </li>
-            <li>
-              <Link to="/youtube"><SiYoutube /></Link>
-            </li>
-            <li>
-              <Link to="/linkedin"><RiLinkedinBoxFill /></Link>
-            </li>
-          </ul>
-        </div>
-
-        <div className="footer-section contact-info">
-          <h3>CONTACT US</h3>
-          <div className="email">
-            <MdOutlineMail className="icon" />
-            <p>
-              <a href="mailto:habsa.abdirizack@student.moringaschool.com">
-                habsa.abdirizack@student.moringaschool.com
-              </a>
-            </p>
-            <p>
-              <a href="mailto:melissa.kiptoo@student.moringaschool.com">
-                melissa.kiptoo@student.moringaschool.com
-              </a>
-            </p>
-            <p>
-              <a href="mailto:eugine.odera@student.moringaschool.com">
-                eugine.odera@student.moringaschool.com
-              </a>
-            </p>
+    <footer className="bg-dark text-white py-4">
+      <div className="container">
+        <div className="row">
+          {/* Quick Links Section */}
+          <div className="col-md-6">
+            <h5>QUICK LINKS</h5>
+            <ul className="list-unstyled d-flex gap-3">
+              <li>
+                <Link to="/x" className="text-white fs-4">
+                  <BsTwitterX />
+                </Link>
+              </li>
+              <li>
+                <Link to="/instagram" className="text-white fs-4">
+                  <FaInstagram />
+                </Link>
+              </li>
+              <li>
+                <Link to="/youtube" className="text-white fs-4">
+                  <SiYoutube />
+                </Link>
+              </li>
+              <li>
+                <Link to="/linkedin" className="text-white fs-4">
+                  <RiLinkedinBoxFill />
+                </Link>
+              </li>
+            </ul>
           </div>
 
-          <div className="phone">
-            <FaPhoneAlt className="icon" />
-            <p>
-              <a href="tel:+254790698418">+254 790 698 418</a>
-            </p>
+          {/* Contact Info Section */}
+          <div className="col-md-6">
+            <h5>CONTACT US</h5>
+            <div>
+              <MdOutlineMail className="me-2 fs-4" />
+              <a
+                href="mailto:habsa.abdirizack@student.moringaschool.com"
+                className="text-white d-block"
+              >
+                habsa.abdirizack@student.moringaschool.com
+              </a>
+              <a
+                href="mailto:melissa.kiptoo@student.moringaschool.com"
+                className="text-white d-block"
+              >
+                melissa.kiptoo@student.moringaschool.com
+              </a>
+              <a
+                href="mailto:eugine.odera@student.moringaschool.com"
+                className="text-white d-block"
+              >
+                eugine.odera@student.moringaschool.com
+              </a>
+            </div>
+
+            <div className="mt-2">
+              <FaPhoneAlt className="me-2 fs-5" />
+              <a href="tel:+254790698418" className="text-white">
+                +254 790 698 418
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="footer-bottom">
-        <p>&copy; 2025 www.garageautomation.com</p>
+      {/* Footer Bottom */}
+      <div className="text-center mt-3">
+        <p className="mb-0">&copy; 2025 www.garageautomation.com</p>
       </div>
     </footer>
   );

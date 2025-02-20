@@ -1,44 +1,48 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
-import "./Navbar.css"; 
+import { FaBars, FaTimes } from "react-icons/fa";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+      <div className="container-fluid">
         {/* Logo */}
-        <Link to="/" className="logo">
-          Auto<span>Fix Hub</span>
+        <Link to="/" className="navbar-brand fw-bold">
+          Auto<span className="text-warning">Fix Hub</span>
         </Link>
 
         {/* Mobile Menu Icon */}
-        <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           {menuOpen ? <FaTimes /> : <FaBars />}
-        </div>
+        </button>
 
         {/* Navbar Links */}
-        <ul className={menuOpen ? "nav-menu active" : "nav-menu"}>
-          <li>
-            <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          </li>
-          <li>
-            <Link to="/vehicle" onClick={() => setMenuOpen(false)}>Vehicle</Link>
-          </li>
-          <li>
-            <Link to="/work" onClick={() => setMenuOpen(false)}>Work</Link>
-          </li>
-          
-          <li>
-            <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
-          </li>
-          <li>
-            <Link to="/register" className="register-btn" onClick={() => setMenuOpen(false)}>Register</Link>
-          </li>
-        </ul>
-
+        <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/vehicle" className="nav-link" onClick={() => setMenuOpen(false)}>Vehicle</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/work" className="nav-link" onClick={() => setMenuOpen(false)}>Work</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link" onClick={() => setMenuOpen(false)}>Login</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/register" className="btn btn-warning px-3" onClick={() => setMenuOpen(false)}>Register</Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   );
