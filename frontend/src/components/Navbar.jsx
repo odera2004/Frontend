@@ -11,7 +11,7 @@ function Navbar() {
       <div className="navbar-container">
         {/* Logo */}
         <Link to="/" className="logo">
-          Garage<span>Automation</span>
+          Auto<span>Fix Hub</span>
         </Link>
 
         {/* Mobile Menu Icon */}
