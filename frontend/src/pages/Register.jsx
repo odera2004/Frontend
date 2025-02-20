@@ -10,7 +10,7 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState({ text: "", type: "" });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,20 +20,44 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      setMessage("Passwords do not match!");
+    // Check for empty fields
+    if (!formData.firstname || !formData.lastname || !formData.email || !formData.password || !formData.confirmPassword) {
+      setMessage({ text: "All fields are required!", type: "danger" });
       return;
     }
 
-    setMessage(`Account created successfully! Welcome, ${formData.firstname}!`);
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setMessage({ text: "Invalid email format!", type: "danger" });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setMessage({ text: "Password must be at least 6 characters!", type: "danger" });
+      return;
+    }
+    
+    if (formData.password !== formData.confirmPassword) {
+      setMessage({ text: "Passwords do not match!", type: "danger" });
+      return;
+    }
+
+    setMessage({ text: `Account created successfully! Welcome, ${formData.firstname}!`, type: "success" });
+
+    //  redirect to login
     setTimeout(() => navigate("/login"), 2000);
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow p-4 w-50">
+    <div className="register-container d-flex justify-content-center align-items-center vh-100">
+      <div className="register-card card shadow-lg p-5 w-75">
         <h2 className="text-center fw-bold">Register</h2>
-        {message && <div className="alert alert-warning text-center">{message}</div>}
+        {message.text && (
+          <div className={`alert alert-${message.type} text-center`}>
+            {message.text}
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-6 mb-3">
