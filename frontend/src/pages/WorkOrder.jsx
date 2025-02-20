@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 function WorkOrders() {
   const [activeOrders, setActiveOrders] = useState([
-    { id: 1, orderRef: "WO-001", vehicle: "Toyota Corolla", issue: "Engine overheating", technician: "John Doe", status: "In Progress" },
-    { id: 2, orderRef: "WO-002", vehicle: "Honda Civic", issue: "Brake failure", technician: "Jane Smith", status: "Assigned" }
+    { id: 1, orderRef: "WO-001", vehicle: "Toyota Corolla", issue: "Engine overheating", technician: "Hafsa Abdy", status: "In Progress" },
+    { id: 2, orderRef: "WO-002", vehicle: "Honda Civic", issue: "Brake failure", technician: "Jared Smith", status: "Assigned" }
   ]);
 
   const [previousOrders, setPreviousOrders] = useState([
-    { id: 3, orderRef: "WO-003", vehicle: "Ford Focus", issue: "Oil change", technician: "Mike Johnson", status: "Completed" },
-    { id: 4, orderRef: "WO-004", vehicle: "BMW X5", issue: "Battery replacement", technician: "Emily Davis", status: "Completed" }
+    { id: 3, orderRef: "WO-003", vehicle: "Ford Focus", issue: "Oil change", technician: "Douyin", status: "Completed" },
+    { id: 4, orderRef: "WO-004", vehicle: "BMW X5", issue: "Battery replacement", technician: "Sunghoon", status: "Completed" }
   ]);
 
   return (
