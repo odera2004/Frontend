@@ -6,10 +6,13 @@ import { SiYoutube } from "react-icons/si";
 import { RiLinkedinBoxFill } from "react-icons/ri";
 import { MdOutlineMail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
+import "./Footer.css"; 
+
 function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
+        {/* Quick Links Section */}
         <div className="footer-section quick-links">
           <h3>QUICK LINKS</h3>
           <ul>
@@ -20,32 +23,44 @@ function Footer() {
               <Link to="/instagram"><FaInstagram /></Link>
             </li>
             <li>
-              <Link to="youtube"><SiYoutube /></Link>
+              <Link to="/youtube"><SiYoutube /></Link>
             </li>
             <li>
-              <Link to="linkedin"><RiLinkedinBoxFill /></Link>
+              <Link to="/linkedin"><RiLinkedinBoxFill /></Link>
             </li>
-            
           </ul>
         </div>
 
-        {/* Contact Information Section */}
         <div className="footer-section contact-info">
+          <h3>CONTACT US</h3>
           <div className="email">
             <MdOutlineMail className="icon" />
-            <p>habsa.abdirizack@student.moringaschool.com</p>
-            <p>melissa.kiptoo@student.moringaschool.com</p>
-            <p>eugine.odera@student.moringaschool.com</p>
-            
+            <p>
+              <a href="mailto:habsa.abdirizack@student.moringaschool.com">
+                habsa.abdirizack@student.moringaschool.com
+              </a>
+            </p>
+            <p>
+              <a href="mailto:melissa.kiptoo@student.moringaschool.com">
+                melissa.kiptoo@student.moringaschool.com
+              </a>
+            </p>
+            <p>
+              <a href="mailto:eugine.odera@student.moringaschool.com">
+                eugine.odera@student.moringaschool.com
+              </a>
+            </p>
           </div>
+
           <div className="phone">
             <FaPhoneAlt className="icon" />
             <p>
-              <a href="tel:+254790698418">+254 790698418</a>
+              <a href="tel:+254790698418">+254 790 698 418</a>
             </p>
           </div>
         </div>
       </div>
+
       <div className="footer-bottom">
         <p>&copy; 2025 www.garageautomation.com</p>
       </div>
