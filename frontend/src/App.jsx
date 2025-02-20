@@ -1,30 +1,32 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Vehicle from "./pages/Vehicle";
+import WorkOrder from "./pages/WorkOrder";
 
-import Dashboard from "./pages/Admin/Dashboard"
-import Employee from "./pages/Admin/Employee"
-import Billing from "./pages/Admin/Billing"
-import Stock from "./pages/Admin/Stock"
-import Task from "./pages/Employee/Task"
-import WorkOrder from "./pages/Employee/Workorder";
-import Checkout from "./pages/Employee/Checkout";
-import Quotation from "./pages/Employee/Quotation";
+import Login from "./pages/Login";  
+import Register from "./pages/Register"; 
 
+import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/employee" element={<Employee />} />
-        <Route path="/billing" element={<Billing />} />
-        <Route path="/stock" element={<Stock />} />
-        <Route path="/task" element={<Task />} />
-        <Route path="/issue" element={<WorkOrder />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/quotation" element={<Quotation />} />
-      </Routes>
-    </BrowserRouter>
+    <Router>
+      <Navbar />
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/vehicle" element={<Vehicle />} />
+          <Route path="/work" element={<WorkOrder />} />
+          
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+      <Footer />
+    </Router>
+
   );
 }
 
