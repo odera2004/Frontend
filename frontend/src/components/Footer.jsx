@@ -1,82 +1,85 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaInstagram, FaPhoneAlt } from "react-icons/fa";
-import { BsTwitterX } from "react-icons/bs";
-import { SiYoutube } from "react-icons/si";
-import { RiLinkedinBoxFill } from "react-icons/ri";
-import { MdOutlineMail } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 function Footer() {
   return (
-    <footer className="bg-dark text-white py-4">
+    <footer className="bg-dark text-white py-3 mt-auto w-100">
       <div className="container">
-        <div className="row">
-          {/* Quick Links Section */}
-          <div className="col-md-6">
-            <h5>QUICK LINKS</h5>
-            <ul className="list-unstyled d-flex gap-3">
-              <li>
-                <Link to="/x" className="text-white fs-4">
-                  <BsTwitterX />
-                </Link>
-              </li>
-              <li>
-                <Link to="/instagram" className="text-white fs-4">
-                  <FaInstagram />
-                </Link>
-              </li>
-              <li>
-                <Link to="/youtube" className="text-white fs-4">
-                  <SiYoutube />
-                </Link>
-              </li>
-              <li>
-                <Link to="/linkedin" className="text-white fs-4">
-                  <RiLinkedinBoxFill />
-                </Link>
-              </li>
-            </ul>
+        <div className="row align-items-center text-center text-md-start">
+          {/* Branding */}
+          <div className="col-md-4 mb-3 mb-md-0">
+            <h5 className="fw-bold">MyWebsite</h5>
+            <p className="small mb-0">Your trusted website for amazing content.</p>
           </div>
 
-          {/* Contact Info Section */}
-          <div className="col-md-6">
-            <h5>CONTACT US</h5>
-            <div>
-              <MdOutlineMail className="me-2 fs-4" />
-              <a
-                href="mailto:habsa.abdirizack@student.moringaschool.com"
-                className="text-white d-block"
-              >
-                habsa.abdirizack@student.moringaschool.com
-              </a>
-              <a
-                href="mailto:melissa.kiptoo@student.moringaschool.com"
-                className="text-white d-block"
-              >
-                melissa.kiptoo@student.moringaschool.com
-              </a>
-              <a
-                href="mailto:eugine.odera@student.moringaschool.com"
-                className="text-white d-block"
-              >
-                eugine.odera@student.moringaschool.com
-              </a>
-            </div>
+          {/* Navigation Links */}
+          <div className="col-md-4 text-center mb-3 mb-md-0">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `text-white text-decoration-none me-3 small ${
+                  isActive ? "fw-bold" : "hover-underline"
+                }`
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `text-white text-decoration-none small ${
+                  isActive ? "fw-bold" : "hover-underline"
+                }`
+              }
+            >
+              About
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `text-white text-decoration-none small ${
+                  isActive ? "fw-bold" : "hover-underline"
+                }`
+              }
+            >
+              Contact
+            </NavLink>
+          </div>
 
-            <div className="mt-2">
-              <FaPhoneAlt className="me-2 fs-5" />
-              <a href="tel:+254790698418" className="text-white">
-                +254 790 698 418
-              </a>
-            </div>
+          {/* Social Media Icons */}
+          <div className="col-md-4 text-center text-md-end">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white text-decoration-none me-3"
+            >
+              <i className="bi bi-twitter fs-5"></i>
+            </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white text-decoration-none me-3"
+            >
+              <i className="bi bi-facebook fs-5"></i>
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white text-decoration-none"
+            >
+              <i className="bi bi-linkedin fs-5"></i>
+            </a>
           </div>
         </div>
-      </div>
 
-      {/* Footer Bottom */}
-      <div className="text-center mt-3">
-        <p className="mb-0">&copy; 2025 www.garageautomation.com</p>
+        <div className="text-center mt-3 small">
+          &copy; {new Date().getFullYear()} MyWebsite. All rights reserved.
+        </div>
       </div>
     </footer>
   );
