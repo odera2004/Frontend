@@ -3,14 +3,13 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Vehicle from "./pages/Vehicle";
 import Work from "./pages/WorkOrder";
-
 import Billings from "./pages/Billings";
-
+import Booking from "./pages/Booking";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
-import './App.css';
 
+import './App.css';
 
 function App() {
   return (
@@ -21,6 +20,8 @@ function App() {
         <Route path="/vehicle" element={<Vehicle />} />
         <Route path="/work" element={<Work />} />
         <Route path="/billings" element={<Billings />} />
+        <Route path="/book" element={<Booking />} /> {/* ✅ Correct route */}
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
