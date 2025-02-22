@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function Footer() {
   return (
-    <footer className="bg-dark text-white py-4">
+    <footer className="bg-dark text-white py-4 mt-auto">
       <div className="container">
         <div className="row">
           {/* Quick Links Section */}
@@ -46,19 +46,22 @@ function Footer() {
               <MdOutlineMail className="me-2 fs-4" />
               <a
                 href="mailto:habsa.abdirizack@student.moringaschool.com"
-                className="text-white d-block"
+                className="text-white d-block text-truncate"
+                style={{ maxWidth: "300px" }}
               >
                 habsa.abdirizack@student.moringaschool.com
               </a>
               <a
                 href="mailto:melissa.kiptoo@student.moringaschool.com"
-                className="text-white d-block"
+                className="text-white d-block text-truncate"
+                style={{ maxWidth: "300px" }}
               >
                 melissa.kiptoo@student.moringaschool.com
               </a>
               <a
                 href="mailto:eugine.odera@student.moringaschool.com"
-                className="text-white d-block"
+                className="text-white d-block text-truncate"
+                style={{ maxWidth: "300px" }}
               >
                 eugine.odera@student.moringaschool.com
               </a>

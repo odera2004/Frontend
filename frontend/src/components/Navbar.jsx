@@ -1,51 +1,53 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
-import "bootstrap/dist/css/bootstrap.min.css";
+import logo from "../assets/logo.png";
 
-function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-      <div className="container-fluid">
-        {/* Logo */}
-        <Link to="/" className="navbar-brand fw-bold">
-          Auto<span className="text-warning">Fix Hub</span>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid bg-dark"> 
+        <Link className="navbar-brand text-light d-flex align-items-center" to="/"> 
+          <img src={logo} alt="Logo" width="50" height="50" />
+          <span className="ms-2">Auto Fix Hub</span> 
         </Link>
-
-        {/* Mobile Menu Icon */}
         <button
           className="navbar-toggler"
           type="button"
-          onClick={() => setMenuOpen(!menuOpen)}
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          {menuOpen ? <FaTimes /> : <FaBars />}
+          <span className="navbar-toggler-icon"></span>
         </button>
-
-        {/* Navbar Links */}
-        <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
+        <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>Home</Link>
+              <Link className="nav-link text-light" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/vehicle" className="nav-link" onClick={() => setMenuOpen(false)}>Vehicle</Link>
+              <Link className="nav-link text-light" to="/vehicle">Vehicle</Link>
             </li>
             <li className="nav-item">
-              <Link to="/work" className="nav-link" onClick={() => setMenuOpen(false)}>Work</Link>
+              <Link className="nav-link text-light" to="/work">Work</Link>
             </li>
             <li className="nav-item">
-              <Link to="/login" className="nav-link" onClick={() => setMenuOpen(false)}>Login</Link>
+              <Link className="nav-link text-light" to="/billings">Billings</Link>
             </li>
             <li className="nav-item">
-              <Link to="/register" className="btn btn-warning px-3" onClick={() => setMenuOpen(false)}>Register</Link>
+              <Link className="nav-link text-light" to="/book">Book</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-light" to="/login">Login</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-light" to="/register">Register</Link>
             </li>
           </ul>
         </div>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;
