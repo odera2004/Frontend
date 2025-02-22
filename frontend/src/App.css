@@ -1,42 +1,230 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* General Page Styling */
+.page-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #2e2e2e;
+  padding: 40px;
+  overflow: auto;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3a3f44;
+  padding: 40px 60px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 1200px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.hero-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  object-fit: contain;
+}
+
+.hero-text {
+  flex: 1;
+  color: #fff;
+  padding-left: 30px;
+}
+
+.hero-text h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Cards Section (2x2 Grid Layout) */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .card {
-  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #444a52;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  width: 100%;
+  min-height: 250px;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.card:hover {
+  transform: scale(1.05);
+  background-color: #575d65;
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-text {
+  padding-top: 15px;
+  text-align: center;
+}
+
+.card-text h2 {
+  font-size: 20px;
+  color: #f8c20e;
+}
+
+.card-text p {
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+/* Full-Page Layout for Other Pages */
+.page-content {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2e2e2e;
+  padding: 40px;
+}
+
+/* Login & Register Container */
+.login-container,
+.register-container {
+  background: #444a52;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+  height: 90vh;
+  text-align: center;
+}
+
+.login-container h2,
+.register-container h2 {
+  color: #f8c20e;
+  margin-bottom: 20px;
+}
+
+/* Form Styling */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input.form-control {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Button Styling */
+.btn-primary {
+  background: #f8c20e;
+  color: #222;
+  border: none;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background: #d9a90f;
+}
+
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  padding: 15px 30px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+.navbar a:hover {
+  color: #f8c20e;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+  }
+
+  .hero-text {
+    padding-left: 0;
+    margin-top: 20px;
+  }
+
+  .hero-image-container {
+    justify-content: center;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .navbar a {
+    margin: 10px 0;
+  }
+
+  .login-container,
+  .register-container {
+    padding: 30px;
+    max-width: 90%;
+  }
 }
