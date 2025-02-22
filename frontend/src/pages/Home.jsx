@@ -1,35 +1,30 @@
-import React from "react";
-import carImage from "../assets/car.png";
-import paintingImage from "../assets/painting.jpg";
-import engineImage from "../assets/engine.jpg";
-import tireImage from "../assets/tire.jpg";
-import brakeImage from "../assets/brake.jpg";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Home() {
-  const services = [
-    { title: "Painting", img: paintingImage, desc: "Premium auto painting services." },
-    { title: "Engine Maintenance", img: engineImage, desc: "Expert engine care." },
-    { title: "Tire & Wheel Services", img: tireImage, desc: "Alignment & balancing." },
-    { title: "Brake Repair", img: brakeImage, desc: "Brake inspections & repairs." },
-  ];
+  const [services, setServices] = useState([
+    { title: "Painting", image: "painting.jpg", desc: "Premium auto painting services." },
+    { title: "Engine Maintenance", image: "engine.jpg", desc: "Expert engine care." },
+    { title: "Tire & Wheel Services", image: "tire.jpg", desc: "Alignment & balancing." },
+    { title: "Brake Repair", image: "brake.jpg", desc: "Brake inspections & repairs." },
+  ]);
 
   return (
-    <div className="container my-5">
-      <div className="row align-items-center text-center text-md-start">
+    <div className="container my-5 py-5">
+      <div className="row align-items-center text-center text-md-start py-5">
         <div className="col-md-6">
           <h1 className="fw-bold">Welcome</h1>
           <p className="lead">Your car gets the attention it deserves at <strong>Auto Fix Hub</strong>.</p>
         </div>
-        <div className="col-md-6">
-          <img src={carImage} alt="Car" className="img-fluid rounded shadow" />
+        <div className="col-md-6 text-center">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZgKLEIEpuKmp46mB-Qqjz_JX03qPeXuT3vA&s" alt="Car Service" className="img-fluid rounded shadow" />
         </div>
       </div>
-      <div className="row mt-4 g-4">
+      <div className="row mt-5 g-4">
         {services.map((service, index) => (
           <div key={index} className="col-md-6">
             <div className="card shadow border-0 h-100">
-              <img src={service.img} alt={service.title} className="card-img-top" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0lOpcjsxq4V1MWVAX4TrxL91-0idx8ifFhQ&s" alt={service.title} className="card-img-top" />
               <div className="card-body text-center">
                 <h5 className="fw-bold">{service.title}</h5>
                 <p>{service.desc}</p>

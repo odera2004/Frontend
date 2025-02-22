@@ -2,11 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 function Footer() {
   return (
-    <footer className="bg-dark text-white py-3 mt-auto w-100">
-      <div className="container">
+    <footer className="bg-dark text-white py-4 mt-auto w-100 position-fixed bottom-0">
+      <div className="container-fluid">
         <div className="row align-items-center text-center text-md-start">
           {/* Branding */}
           <div className="col-md-4 mb-3 mb-md-0">
@@ -19,8 +18,8 @@ function Footer() {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `text-white text-decoration-none me-3 small ${
-                  isActive ? "fw-bold" : "hover-underline"
+                `text-white text-decoration-none me-4 small ${
+                  isActive ? "fw-bold border-bottom border-light" : "hover-underline"
                 }`
               }
             >
@@ -29,8 +28,8 @@ function Footer() {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                `text-white text-decoration-none small ${
-                  isActive ? "fw-bold" : "hover-underline"
+                `text-white text-decoration-none me-4 small ${
+                  isActive ? "fw-bold border-bottom border-light" : "hover-underline"
                 }`
               }
             >
@@ -40,7 +39,7 @@ function Footer() {
               to="/contact"
               className={({ isActive }) =>
                 `text-white text-decoration-none small ${
-                  isActive ? "fw-bold" : "hover-underline"
+                  isActive ? "fw-bold border-bottom border-light" : "hover-underline"
                 }`
               }
             >
@@ -54,30 +53,30 @@ function Footer() {
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white text-decoration-none me-3"
+              className="text-white text-decoration-none me-3 fs-5"
             >
-              <i className="bi bi-twitter fs-5"></i>
+              <i className="bi bi-twitter"></i>
             </a>
             <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white text-decoration-none me-3"
+              className="text-white text-decoration-none me-3 fs-5"
             >
-              <i className="bi bi-facebook fs-5"></i>
+              <i className="bi bi-facebook"></i>
             </a>
             <a
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white text-decoration-none"
+              className="text-white text-decoration-none fs-5"
             >
-              <i className="bi bi-linkedin fs-5"></i>
+              <i className="bi bi-linkedin"></i>
             </a>
           </div>
         </div>
 
-        <div className="text-center mt-3 small">
+        <div className="text-center mt-3 small border-top pt-3">
           &copy; {new Date().getFullYear()} MyWebsite. All rights reserved.
         </div>
       </div>

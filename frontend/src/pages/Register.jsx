@@ -10,7 +10,8 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
-  const [message, setMessage] = useState("");
+
+  const [message, setMessage] = useState({ text: "", type: "" });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,44 +21,85 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      setMessage("Passwords do not match!");
+    if (!formData.firstname || !formData.lastname || !formData.email || !formData.password || !formData.confirmPassword) {
+      setMessage({ text: "All fields are required!", type: "danger" });
       return;
     }
 
-    setMessage(`Account created successfully! Welcome, ${formData.firstname}!`);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setMessage({ text: "Invalid email format!", type: "danger" });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setMessage({ text: "Password must be at least 6 characters!", type: "danger" });
+      return;
+    }
+    
+    if (formData.password !== formData.confirmPassword) {
+      setMessage({ text: "Passwords do not match!", type: "danger" });
+      return;
+    }
+
+    setMessage({ text: `Account created successfully! Welcome, ${formData.firstname}!`, type: "success" });
+
     setTimeout(() => navigate("/login"), 2000);
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow p-4 w-50">
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{
+        backgroundImage: `url("https://media.istockphoto.com/id/1936226112/photo/african-man-mechanic-in-uniform-at-the-car-repair-station-portrait.webp?a=1&b=1&s=612x612&w=0&k=20&c=wOsfCFjupy13D-pdznupCXFxLXQ_W5KY7sYkGI8CJgY=")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        width: "100vw",
+        height: "100vh",
+        position: "fixed",
+        top: 0,
+        left: 0,
+      }}
+    >
+      <div
+        className="card shadow-lg p-4"
+        style={{
+          background: "rgba(44, 62, 80, 0.9)", // Deep gray-blue with transparency
+          color: "white",
+          width: "90%",
+          maxWidth: "400px",
+          borderRadius: "10px",
+        }}
+      >
         <h2 className="text-center fw-bold">Register</h2>
-        {message && <div className="alert alert-warning text-center">{message}</div>}
+        {message.text && (
+          <div className={`alert alert-${message.type} text-center`}>
+            {message.text}
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col-md-6 mb-3">
-              <input
-                type="text"
-                name="firstname"
-                className="form-control"
-                placeholder="First Name"
-                value={formData.firstname}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="col-md-6 mb-3">
-              <input
-                type="text"
-                name="lastname"
-                className="form-control"
-                placeholder="Last Name"
-                value={formData.lastname}
-                onChange={handleChange}
-                required
-              />
-            </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="firstname"
+              className="form-control"
+              placeholder="First Name"
+              value={formData.firstname}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="lastname"
+              className="form-control"
+              placeholder="Last Name"
+              value={formData.lastname}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="mb-3">
             <input
@@ -92,10 +134,12 @@ function Register() {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100">Register</button>
+          <button type="submit" className="btn btn-warning w-100 text-dark fw-bold">
+            Register
+          </button>
         </form>
         <p className="text-center mt-3">
-          Already have an account? <a href="/login" className="text-primary">Login here</a>
+          Already have an account? <a href="/login" className="text-warning fw-bold">Login here</a>
         </p>
       </div>
     </div>
