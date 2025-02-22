@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import paintingImage from "../assets/painting.jpg";
-import engineImage from "../assets/engine.jpg";
-import tireImage from "../assets/tire.jpg";
-import brakeImage from "../assets/brake.jpg";
-import oilChangeImage from "../assets/oil_change.jpg";
-import batteryImage from "../assets/battery.jpg";
-import transmissionImage from "../assets/transmission.jpg";
-import exhaustImage from "../assets/exhaust.jpg";
-import acRepairImage from "../assets/ac_repair.jpg";
-import alignmentImage from "../assets/alignment.jpg";
-import detailingImage from "../assets/detailing.jpg";
-import suspensionImage from "../assets/suspension.jpg";
+import paintingImage from "../../assets/painting.jpg";
+import engineImage from "../../assets/engine.jpg";
+import tireImage from "../../assets/tire.jpg";
+import brakeImage from "../../assets/brake.jpg";
+import oilChangeImage from "../../assets/oil_change.jpg";
+import batteryImage from "../../assets/battery.jpg";
+import transmissionImage from "../../assets/transmission.jpg";
+import exhaustImage from "../../assets/exhaust.jpg";
+import acRepairImage from "../../assets/ac_repair.jpg";
+import alignmentImage from "../../assets/alignment.jpg";
+import detailingImage from "../../assets/detailing.jpg";
+import suspensionImage from "../../assets/suspension.jpg";
 
 const services = [
   { title: "Painting", img: paintingImage },
