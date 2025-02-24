@@ -13,6 +13,7 @@ import './App.css';
 
 function App() {
   return (
+    // ROUTING
     <Router>
       <Navbar />
       <Routes>
@@ -20,7 +21,7 @@ function App() {
         <Route path="/vehicle" element={<Vehicle />} />
         <Route path="/work" element={<Work />} />
         <Route path="/billings" element={<Billings />} />
-        <Route path="/book" element={<Booking />} /> {/* ✅ Correct route */}
+        <Route path="/book" element={<Booking />} /> 
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
