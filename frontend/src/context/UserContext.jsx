@@ -55,6 +55,52 @@ export const UserProvider = ({ children }) => {
             toast.error("Network error. Please try again.");
         });
     };
+    // LOGIN
+    const login_with_google = (email) => {
+        toast.loading("Logging you in...");
+        fetch("http://127.0.0.1:5000/login_with_google", {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ email })
+        })
+        .then((resp) => resp.json())
+        .then((response) => {
+            if (response.access_token) {
+                toast.dismiss();
+                sessionStorage.setItem("token", response.access_token);
+                setAuthToken(response.access_token);
+
+                fetch(" ", {
+                    method: "GET",
+                    headers: {
+                        'Content-type': 'application/json',
+                        Authorization: `Bearer ${response.access_token}`
+                    }
+                })
+                .then((response) => response.json())
+                .then((response) => {
+                    if (response.email) {
+                        setCurrentUser(response);
+                    }
+                });
+
+                toast.success("Successfully Logged in");
+                navigate("/");
+            } else if (response.error) {
+                toast.dismiss();
+                toast.error(response.error);
+            } else {
+                toast.dismiss();
+                toast.error("Failed to login");
+            }
+        })
+        .catch((error) => {
+            toast.dismiss();
+            toast.error("Network error. Please try again.");
+        });
+    };
 
     const logout = async () => {
         toast.loading("Logging out...");
@@ -83,6 +129,7 @@ export const UserProvider = ({ children }) => {
             toast.error("Network error. Please try again.");
         });
     };
+    
 
     // Fetch current user
     useEffect(() => {
@@ -113,6 +160,7 @@ export const UserProvider = ({ children }) => {
 
     // ADD user
     const addUser = (first_name, last_name, email, password) => {
+
         console.log("Registering user with:", { first_name, last_name, email }); 
         toast.loading("Registering...");
         fetch("http://127.0.0.1:5000/user", {
@@ -129,9 +177,9 @@ export const UserProvider = ({ children }) => {
         })
         .then((resp) => resp.json())
         .then((response) => {
-            if (response.success) {  
+            if (response.msg) {  
                 toast.dismiss();
-                toast.success(response.success);  
+                toast.success(response.msg);  
                 navigate("/login");
             } else if (response.error) {
                 toast.dismiss();
@@ -151,6 +199,7 @@ export const UserProvider = ({ children }) => {
     const data = {
         authToken,
         login,
+        login_with_google,
         current_user,
         logout,
         addUser,
