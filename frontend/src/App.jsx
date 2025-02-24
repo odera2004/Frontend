@@ -21,6 +21,7 @@ function App() {
         <Route path="/work" element={<Work />} />
         <Route path="/billings" element={<Billings />} />
         <Route path="/book" element={<Booking />} /> {/* ✅ Correct route */}
+        
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
