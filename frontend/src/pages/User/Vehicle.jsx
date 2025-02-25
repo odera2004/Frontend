@@ -8,7 +8,7 @@ import fordImage from "../../assets/ford.jpg";
 import hondaImage from "../../assets/honda.jpg";
 
 const vehicles = [
-  { id: 1, name: "Toyota Corolla", type: "Sedan", price: "Ksh 3,000", img: toyotaImage },
+  { id: 1, name: "Toyota Corolla", type: "Sedan", price: "Ksh 3,000", Service_provided: "Painting", img: toyotaImage, },
   { id: 2, name: "Mitsubishi L200", type: "Pickup Truck", price: "Ksh 5,500", img: mitsubishiImage },
   { id: 3, name: "Mercedes Sprinter", type: "Van", price: "Ksh 7,000", img: mercedesImage },
   { id: 4, name: "BMW X5", type: "SUV", price: "Ksh 10,000", img: bmwImage },
