@@ -1,20 +1,23 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { Alert } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function Register() {
+export default function Register() {
+  const { addUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
-  const [message, setMessage] = useState({ text: "", type: "" });
-  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,30 +26,25 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.firstname || !formData.lastname || !formData.email || !formData.password || !formData.confirmPassword) {
-      setMessage({ text: "All fields are required!", type: "danger" });
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setMessage({ text: "Invalid email format!", type: "danger" });
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      setMessage({ text: "Password must be at least 6 characters!", type: "danger" });
+    if (!formData.first_name || !formData.last_name || !formData.email || !formData.password || !formData.confirmPassword) {
+      setMessage("All fields are required!");
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setMessage({ text: "Passwords do not match!", type: "danger" });
+      setMessage("Passwords do not match!");
       return;
     }
 
-    setMessage({ text: `Account created successfully! Welcome, ${formData.firstname}!`, type: "success" });
-
+    addUser(formData.first_name, formData.last_name, formData.email, formData.password);
+    setMessage("Account created successfully!");
     setTimeout(() => navigate("/login"), 2000);
+  };
+
+  const handleGoogleSignUp = (credential) => {
+    const user_details = jwtDecode(credential);
+    addUser(user_details.given_name, user_details.family_name, user_details.email, "");
+    navigate("/dashboard");
   };
 
   return (
@@ -74,14 +72,14 @@ function Register() {
       <div className="card p-4 shadow-lg text-white" style={{ width: "400px", zIndex: 1, background: "rgba(255, 255, 255, 0.2)", backdropFilter: "blur(10px)", borderRadius: "15px" }}>
         <h2 className="text-center fw-bold mb-3">Register</h2>
 
-        {message.text && <div className={`alert alert-${message.type} text-center`}>{message.text}</div>}
+        {message && <Alert variant={message.includes("successfully") ? "success" : "danger"}>{message}</Alert>}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <input type="text" name="firstname" className="form-control" placeholder="First Name" value={formData.firstname} onChange={handleChange} required />
+            <input type="text" name="first_name" className="form-control" placeholder="First Name" value={formData.first_name} onChange={handleChange} required />
           </div>
           <div className="mb-3">
-            <input type="text" name="lastname" className="form-control" placeholder="Last Name" value={formData.lastname} onChange={handleChange} required />
+            <input type="text" name="last_name" className="form-control" placeholder="Last Name" value={formData.last_name} onChange={handleChange} required />
           </div>
           <div className="mb-3">
             <input type="email" name="email" className="form-control" placeholder="Email" value={formData.email} onChange={handleChange} required />
@@ -96,22 +94,20 @@ function Register() {
         </form>
 
         <p className="text-center mt-3">
-          Already have an account? <a href="/login" className="text-white fw-bold">Login here</a>
+          Already have an account? <Link to="/login" className="text-white fw-bold">Login here</Link>
         </p>
 
-        <div className="d-flex flex-column gap-2 mt-3">
-          <button className="btn btn-light border w-100 d-flex align-items-center justify-content-center">
-            <FcGoogle size={20} className="me-2" />
-            Continue with Google
-          </button>
-          <button className="btn btn-dark w-100 d-flex align-items-center justify-content-center">
-            <FaGithub size={20} className="me-2" />
-            Continue with GitHub
-          </button>
+        <div className="text-center mt-4">
+          <p className="text-muted">Or sign up with</p>
+          <div className="text-center mt-3">
+      <GoogleLogin
+      onSuccess={credentialResponse => {
+        handleGoogleSignUp(credentialResponse.credential)}}
+        onError={() => {
+          console.log('Login Failed');}}/>
+      </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default Register;
