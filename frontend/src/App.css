@@ -2,12 +2,17 @@
 .page-container {
   min-height: 100vh;
   width: 100%;
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #2e2e2e;
+  background-color: #2e2e2e;
   padding: 40px;
+  overflow: auto;
   overflow: auto;
 }
 
@@ -17,9 +22,11 @@
   align-items: center;
   justify-content: space-between;
   background-color: #3a3f44;
+  background-color: #3a3f44;
   padding: 40px 60px;
   border-radius: 10px;
   width: 100%;
+  max-width: 1200px;
   max-width: 1200px;
 }
 
@@ -32,7 +39,9 @@
 .hero-image {
   width: 100%;
   max-width: 450px;
+  max-width: 450px;
   height: auto;
+  object-fit: contain;
   object-fit: contain;
 }
 
@@ -53,11 +62,17 @@
 }
 
 /* Cards Section (2x2 Grid Layout) */
+/* Cards Section (2x2 Grid Layout) */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
   margin-top: 40px;
+  width: 100%;
+  max-width: 1000px;
   width: 100%;
   max-width: 1000px;
 }
@@ -65,12 +80,23 @@
 .card {
   display: flex;
   flex-direction: column;
+  flex-direction: column;
   align-items: center;
+  background-color: #444a52;
   background-color: #444a52;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  width: 100%;
+  min-height: 250px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background-color: #575d65;
   width: 100%;
   min-height: 250px;
   transition: transform 0.3s ease, background 0.3s ease;
@@ -84,6 +110,9 @@
 .card-img {
   width: 100%;
   height: 200px;
+.card-img {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -91,14 +120,18 @@
 .card-text {
   padding-top: 15px;
   text-align: center;
+  padding-top: 15px;
+  text-align: center;
 }
 
 .card-text h2 {
+  font-size: 20px;
   font-size: 20px;
   color: #f8c20e;
 }
 
 .card-text p {
+  font-size: 14px;
   font-size: 14px;
   color: #ddd;
   line-height: 1.5;
@@ -119,15 +152,35 @@
 .login-container,
 .register-container {
   background: #444a52;
+/* Full-Page Layout for Other Pages */
+.page-content {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2e2e2e;
+  padding: 40px;
+}
+
+/* Login & Register Container */
+.login-container,
+.register-container {
+  background: #444a52;
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   width: 100%;
+  max-width: 500px;
+  height: 90vh;
   max-width: 500px;
   height: 90vh;
   text-align: center;
 }
 
+.login-container h2,
+.register-container h2 {
 .login-container h2,
 .register-container h2 {
   color: #f8c20e;
@@ -137,6 +190,7 @@
 /* Form Styling */
 .input-group {
   display: flex;
+  flex-direction: column;
   flex-direction: column;
   gap: 15px;
 }
@@ -159,6 +213,7 @@ input.form-control {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 15px;
+  width: 100%;
   width: 100%;
 }
 
