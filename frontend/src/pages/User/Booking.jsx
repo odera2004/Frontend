@@ -15,18 +15,18 @@ import detailingImage from "../../assets/detailing.jpg";
 import suspensionImage from "../../assets/suspension.jpg";
 
 const services = [
-  { title: "Painting", img: paintingImage },
-  { title: "Engine Maintenance", img: engineImage },
-  { title: "Tire & Wheel Services", img: tireImage },
-  { title: "Brake Repair", img: brakeImage },
-  { title: "Oil Change", img: oilChangeImage },
-  { title: "Battery Replacement", img: batteryImage },
-  { title: "Transmission Repair", img: transmissionImage },
-  { title: "Exhaust System Repair", img: exhaustImage },
-  { title: "A/C Repair", img: acRepairImage },
-  { title: "Wheel Alignment", img: alignmentImage },
-  { title: "Car Detailing", img: detailingImage },
-  { title: "Suspension Repair", img: suspensionImage }
+  { title: "Painting", img: paintingImage, description: "Give your car a fresh new look with our expert painting services." },
+  { title: "Engine Maintenance", img: engineImage, description: "Keep your engine running smoothly with regular maintenance." },
+  { title: "Tire & Wheel Services", img: tireImage, description: "Ensure safety and performance with our tire and wheel services." },
+  { title: "Brake Repair", img: brakeImage, description: "Stay safe on the road with professional brake repair services." },
+  { title: "Oil Change", img: oilChangeImage, description: "Extend your engine's lifespan with a quick and clean oil change." },
+  { title: "Battery Replacement", img: batteryImage, description: "Get a reliable battery replacement to avoid unexpected breakdowns." },
+  { title: "Transmission Repair", img: transmissionImage, description: "Smooth and efficient transmission for optimal vehicle performance." },
+  { title: "Exhaust System Repair", img: exhaustImage, description: "Improve fuel efficiency with expert exhaust system repairs." },
+  { title: "A/C Repair", img: acRepairImage, description: "Stay cool and comfortable with our air conditioning repair services." },
+  { title: "Wheel Alignment", img: alignmentImage, description: "Enhance handling and tire life with precision wheel alignment." },
+  { title: "Car Detailing", img: detailingImage, description: "Restore your car’s shine with a professional detailing service." },
+  { title: "Suspension Repair", img: suspensionImage, description: "Ensure a smooth ride with our expert suspension repair services." }
 ];
 
 const Booking = () => {
@@ -58,7 +58,6 @@ const Booking = () => {
   return (
     <Container fluid className="py-5 pt-5" style={{ backgroundColor: "#d7ccc8", minHeight: "100vh" }}>
       <Row className="justify-content-center" style={{ marginTop: "80px" }}>
-        {/* Booking Form */}
         <Col md={4} className="mb-4">
           <Card className="p-4 shadow-lg" style={{ backgroundColor: "#8d6e63", color: "#fff" }}>
             <h2 className="text-center mb-4">Book a Service</h2>
@@ -72,105 +71,40 @@ const Booking = () => {
                   ))}
                 </Form.Select>
               </Form.Group>
-
               <Row>
-                <Col md={6}>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Date</Form.Label>
-                    <Form.Control type="date" name="date" onChange={handleChange} required />
-                  </Form.Group>
-                </Col>
-                <Col md={6}>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Time</Form.Label>
-                    <Form.Control type="time" name="time" onChange={handleChange} required />
-                  </Form.Group>
-                </Col>
+                <Col md={6}><Form.Group className="mb-3"><Form.Label>Date</Form.Label><Form.Control type="date" name="date" onChange={handleChange} required /></Form.Group></Col>
+                <Col md={6}><Form.Group className="mb-3"><Form.Label>Time</Form.Label><Form.Control type="time" name="time" onChange={handleChange} required /></Form.Group></Col>
               </Row>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" name="name" placeholder="Enter your name" onChange={handleChange} required />
-              </Form.Group>
-
+              <Form.Group className="mb-3"><Form.Label>Name</Form.Label><Form.Control type="text" name="name" placeholder="Enter your name" onChange={handleChange} required /></Form.Group>
               <Row>
-                <Col md={6}>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control type="tel" name="phone" placeholder="Enter phone number" onChange={handleChange} required />
-                  </Form.Group>
-                </Col>
-                <Col md={6}>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" name="email" placeholder="Enter email" onChange={handleChange} required />
-                  </Form.Group>
-                </Col>
+                <Col md={6}><Form.Group className="mb-3"><Form.Label>Phone</Form.Label><Form.Control type="tel" name="phone" placeholder="Enter phone number" onChange={handleChange} required /></Form.Group></Col>
+                <Col md={6}><Form.Group className="mb-3"><Form.Label>Email</Form.Label><Form.Control type="email" name="email" placeholder="Enter email" onChange={handleChange} required /></Form.Group></Col>
               </Row>
-
               <Row>
-                <Col md={6}>
-                  <Form.Control type="text" name="carModel" placeholder="Car Model" onChange={handleChange} required className="mb-3" />
-                </Col>
-                <Col md={6}>
-                  <Form.Control type="text" name="carYear" placeholder="Car Year" onChange={handleChange} required className="mb-3" />
-                </Col>
+                <Col md={6}><Form.Group className="mb-3"><Form.Label>Model</Form.Label><Form.Control type="text" name="carModel" placeholder="Enter the Model" onChange={handleChange} required /></Form.Group></Col>
+                <Col md={6}><Form.Group className="mb-3"><Form.Label>Year</Form.Label><Form.Control type="text" name="carYear" placeholder="Enter the year" onChange={handleChange} required /></Form.Group></Col>
               </Row>
-
               <Form.Group className="mb-3">
                 <Form.Label>License Plate (Optional)</Form.Label>
                 <Form.Control type="text" name="licensePlate" placeholder="Enter license plate" onChange={handleChange} />
               </Form.Group>
-
               <Form.Group className="mb-3">
                 <Form.Label>Special Requests</Form.Label>
                 <Form.Control as="textarea" rows={3} name="specialRequests" placeholder="Any additional requests?" onChange={handleChange} />
               </Form.Group>
-
-              <Button variant="dark" type="submit" className="w-100" style={{ backgroundColor: "#5d4037", border: "none" }}>
-                Book Now
-              </Button>
+              <Button variant="dark" type="submit" className="w-100" style={{ backgroundColor: "#5d4037", border: "none" }}>Book Now</Button>
             </Form>
           </Card>
         </Col>
-
-        {/* Service Cards */}
         <Col md={8}>
           <Row className="g-3" style={{ marginTop: "50px" }}>
-            {services.slice(0, 4).map((service, index) => (
+            {services.map((service, index) => (
               <Col key={index} md={3}>
                 <Card className="h-100 shadow border-0" style={{ backgroundColor: "#d7ccc8" }}>
                   <Card.Img variant="top" src={service.img} style={{ height: "150px", objectFit: "cover" }} />
                   <Card.Body className="text-center">
                     <Card.Title>{service.title}</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-
-          {/* Middle Row of Services */}
-          <Row className="g-3" style={{ marginTop: "50px" }}>
-            {services.slice(4, 8).map((service, index) => (
-              <Col key={index} md={3}>
-                <Card className="h-100 shadow border-0" style={{ backgroundColor: "#d7ccc8" }}>
-                  <Card.Img variant="top" src={service.img} style={{ height: "150px", objectFit: "cover" }} />
-                  <Card.Body className="text-center">
-                    <Card.Title>{service.title}</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-
-          {/* Bottom Row of Services */}
-          <Row className="g-3" style={{ marginTop: "50px" }}>
-            {services.slice(8).map((service, index) => (
-              <Col key={index} md={3}>
-                <Card className="h-100 shadow border-0" style={{ backgroundColor: "#d7ccc8" }}>
-                  <Card.Img variant="top" src={service.img} style={{ height: "150px", objectFit: "cover" }} />
-                  <Card.Body className="text-center">
-                    <Card.Title>{service.title}</Card.Title>
+                    <Card.Text style={{ fontSize: "0.9rem", color: "#555" }}>{service.description}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>

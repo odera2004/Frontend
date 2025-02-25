@@ -1,50 +1,58 @@
-import React from 'react';
+import React from "react";
 
 export default function Stock() {
-    return (
-        <div style={{ display: "flex" }}>
-            {/* Sidebar */}
-            <div className="sidebar" style={{ width: "250px", height: "100vh", background: "#343a40", color: "white", padding: "15px" }}>
-                <h4>Workshop</h4>
-                <div className="dashboard-links" style={{ marginTop: "70px" }}>
-                    <ul className="list-unstyled">
-                        <li>
-                            <a href="#" className="text-white d-block py-2" style={{ textDecoration: "none" }}> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-white d-block py-2" style={{ textDecoration: "none" }}> Employee</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-white d-block py-2" style={{ textDecoration: "none" }}> Billing</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-white d-block py-2" style={{ textDecoration: "none" }}> Stock</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  return (
+    <div className="container-fluid mt-4">
+      <h2 className="mb-4">Stock Management</h2>
 
-            {/* Main Content */}
-            <div className="content" style={{ marginLeft: "20px", padding: "30px", width: "calc(100% - 260px)" }}>
-                {/* Search Panel */}
-                <div className="d-flex justify-content-between ">
-                    <div className="input-group" style={{ width: "1000px" }}>
-                        <input type="text" className="form-control" placeholder="Search Item..." />
-                        <button className="btn btn-outline-secondary" type="button">Search </button>
-                    </div>
-                </div>
-                {/* Stock Table */}
-                <div className="container mt-5">
-                    <div className="card shadow-sm" style={{ width: "107%", margin: "0 auto" }}>
-                        <div className="card-header bg-light border-0">
-                            <h4 className="mb-100">Stock Management</h4>
-                        </div>
-                        <div className="card-body">
-                            <p className="text-muted text-center">No stock data available</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      {/* Search Bar */}
+      <div className="d-flex justify-content-between">
+        <div className="input-group w-50">
+          <input type="text" className="form-control" placeholder="Search Item..." />
+          <button className="btn btn-outline-secondary" type="button">
+            Search
+          </button>
         </div>
-    );
+      </div>
+
+      {/* Stock Table */}
+      <div className="container mt-4">
+        <div className="card shadow-sm">
+          <div className="card-header bg-light border-0">
+            <h4 className="mb-0">Stock Overview</h4>
+          </div>
+          <div className="card-body">
+            <div className="table-responsive">
+              <table className="table table-hover">
+                <thead>
+                  <tr className="bg-light">
+                    <th scope="col" className="py-3">Item Name</th>
+                    <th scope="col" className="py-3">Quantity</th>
+                    <th scope="col" className="py-3">Price</th>
+                    <th scope="col" className="py-3">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { name: "Engine Oil", quantity: 98, price: "Ksh 760", status: "In stock", badge: "success" },
+                    { name: "Paint", quantity: 77, price: "Ksh 10700", status: "In stock", badge: "success" },
+                    { name: "Hard Wax", quantity: 3, price: "Ksh 8,970", status: "Low stock", badge: "warning text-dark" }
+                  ].map((item, index) => (
+                    <tr key={index}>
+                      <td className="py-3">{item.name}</td>
+                      <td className="py-3">{item.quantity}</td>
+                      <td className="py-3">{item.price}</td>
+                      <td className="py-3">
+                        <span className={`badge bg-${item.badge}`}>{item.status}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

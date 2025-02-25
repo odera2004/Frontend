@@ -24,7 +24,7 @@ function Home() {
               maxWidth: "100%",
               width: "600px",
               height: "auto",
-              zIndex: 1, // Ensures the image stays above the background
+              zIndex: 1, 
             }}
           />
         </div>
