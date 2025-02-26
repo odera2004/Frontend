@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { FaInstagram, FaPhoneAlt } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { SiYoutube } from "react-icons/si";
@@ -17,24 +16,44 @@ function Footer() {
             <h5>QUICK LINKS</h5>
             <ul className="list-unstyled d-flex gap-3">
               <li>
-                <Link to="/x" className="text-white fs-4">
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white fs-4"
+                >
                   <BsTwitterX />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/instagram" className="text-white fs-4">
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white fs-4"
+                >
                   <FaInstagram />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/youtube" className="text-white fs-4">
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white fs-4"
+                >
                   <SiYoutube />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/linkedin" className="text-white fs-4">
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white fs-4"
+                >
                   <RiLinkedinBoxFill />
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

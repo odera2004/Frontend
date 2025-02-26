@@ -40,7 +40,7 @@ const Vehicle = () => {
                   <p className="card-text">Type: {vehicle.type}</p>
                   <p className="card-text fw-bold">Price: {vehicle.price}</p>
                   <button className="btn btn-gradient w-100 fw-bold text-white" onClick={() => handleBookNow(vehicle)}>
-                    Book Now 🚗
+                    <button>Book Now 🚗</button>
                   </button>
                 </div>
               </div>

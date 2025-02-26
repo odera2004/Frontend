@@ -8,11 +8,6 @@ const Navbar = () => {
         <Link className="navbar-brand text-light d-flex align-items-center" to="/"> 
           <img src={logo} alt="Logo" width="50" height="50" />
           <span className="ms-2">Auto Fix Hub</span> 
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid bg-dark"> 
-        <Link className="navbar-brand text-light d-flex align-items-center" to="/"> 
-          <img src={logo} alt="Logo" width="50" height="50" />
-          <span className="ms-2">Auto Fix Hub</span> 
         </Link>
         <button
           className="navbar-toggler"
@@ -24,15 +19,7 @@ const Navbar = () => {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
@@ -43,28 +30,20 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link text-light" to="/work">Work</Link>
-              <Link className="nav-link text-light" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-light" to="/vehicle">Vehicle</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-light" to="/work">Work</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-light" to="/billings">Billings</Link>
               <Link className="nav-link text-light" to="/billings">Billings</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-light" to="/book">Book</Link>
-              <Link className="nav-link text-light" to="/book">Book</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-light" to="/profile">Profile</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-light" to="/login">Login</Link>
-              <Link className="nav-link text-light" to="/login">Login</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-light" to="/register">Register</Link>
               <Link className="nav-link text-light" to="/register">Register</Link>
             </li>
           </ul>
@@ -72,7 +51,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
 };
 
 export default Navbar;

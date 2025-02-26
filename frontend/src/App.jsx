@@ -5,6 +5,7 @@ import Vehicle from "./pages/User/Vehicle";
 import Work from "./pages/User/WorkOrder";
 import Billings from "./pages/User/Billings";
 import Booking from "./pages/User/Booking";
+import Profile from "./pages/User/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Admin/Dashboard";
@@ -30,6 +31,7 @@ function App() {
             <Route path="work" element={<Work />} />
             <Route path="billings" element={<Billings />} />
             <Route path="book" element={<Booking />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
 
