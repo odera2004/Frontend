@@ -136,9 +136,10 @@ function Home() {
       <section className="text-center my-5">
         <h2 className="fw-bold">Ready to give your car the best care?</h2>
         <p className="lead">Book your service today!</p>
-        <button className="btn btn-success" onClick={() => navigate('/book')}>
-          Book Now
-        </button>
+        <button className="btn btn-success btn-lg mt-3" onClick={() => navigate('/book')}>
+  Book Now
+</button>
+
       </section>
     </div>
   );
