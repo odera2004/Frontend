@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiEdit, FiUpload, FiPlus, FiSearch, FiSun, FiMoon } from "react-icons/fi";
+import { FiUpload, FiSearch, FiSun, FiMoon } from "react-icons/fi";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Profile = () => {
@@ -11,7 +11,6 @@ const Profile = () => {
     { type: "Oil Change", date: "2025-02-15", mechanic: "Eugine", cost: "$50", status: "Completed" },
     { type: "Brake Replacement", date: "2025-02-20", mechanic: "Mary", cost: "$120", status: "Pending" },
   ]);
-  const [newService, setNewService] = useState({ type: "", date: "", mechanic: "", cost: "", status: "Pending" });
   const [search, setSearch] = useState("");
 
   const handleImageUpload = (event) => {
@@ -23,35 +22,36 @@ const Profile = () => {
     }
   };
 
-  const handleAddService = () => {
-    if (newService.type && newService.date) {
-      setServices([...services, newService]);
-      setNewService({ type: "", date: "", mechanic: "", cost: "", status: "Pending" });
-    }
-  };
-
   return (
     <div className={`container py-4 ${darkMode ? "bg-dark text-light" : "bg-light text-dark"}`}>
-      <button className="btn btn-outline-secondary mb-3" onClick={() => setDarkMode(!darkMode)}>
-        {darkMode ? <FiSun /> : <FiMoon />} {darkMode ? "Light Mode" : "Dark Mode"}
-      </button>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="fw-bold">My Profile</h2>
+        <button className={`btn ${darkMode ? "btn-light" : "btn-dark"}`} onClick={() => setDarkMode(!darkMode)}>
+          {darkMode ? <FiSun /> : <FiMoon />} {darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+      </div>
 
-      <div className="card p-4 text-center">
-        <div className="position-relative mx-auto" style={{ width: "120px" }}>
+      {/* Profile Card */}
+      <div className="card p-4 text-center shadow-sm border-0 rounded">
+        <div className="position-relative mx-auto" style={{ width: "140px" }}>
           <img
-            src={profileImage || "https://via.placeholder.com/120"}
+            src={profileImage || "https://via.placeholder.com/140"}
             alt="Profile"
-            className="rounded-circle w-100 border border-primary"
+            className="rounded-circle w-100 border border-primary shadow"
           />
-          <label className="btn btn-sm btn-outline-primary mt-2" htmlFor="imageUpload">
-            <FiUpload /> Upload
+          <label
+            className="btn btn-sm btn-outline-primary position-absolute"
+            htmlFor="imageUpload"
+            style={{ bottom: "10px", left: "50%", transform: "translateX(-50%)", cursor: "pointer" }}
+          >
+            <FiUpload />
           </label>
           <input type="file" id="imageUpload" className="d-none" onChange={handleImageUpload} accept="image/*" />
         </div>
         <h3 className="mt-3">
           <input
             type="text"
-            className="form-control text-center"
+            className="form-control text-center border-0 fw-bold fs-4"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -59,68 +59,47 @@ const Profile = () => {
         <p>
           <input
             type="text"
-            className="form-control text-center"
+            className="form-control text-center border-0 text-muted"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
           />
         </p>
       </div>
 
-      <div className="card mt-4 p-3">
-        <h4 className="mb-3">Service History</h4>
+      {/* Service History */}
+      <div className="card mt-4 p-3 shadow-sm border-0 rounded">
+        <h4 className="mb-3 fw-semibold">Service History</h4>
         <div className="input-group mb-3">
           <span className="input-group-text"><FiSearch /></span>
           <input type="text" className="form-control" placeholder="Search services..." value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>Service Type</th>
-              <th>Date</th>
-              <th>Mechanic</th>
-              <th>Cost</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {services.filter(s => s.type.toLowerCase().includes(search.toLowerCase())).map((service, index) => (
-              <tr key={index}>
-                <td>{service.type}</td>
-                <td>{service.date}</td>
-                <td>{service.mechanic}</td>
-                <td>{service.cost}</td>
-                <td>{service.status}</td>
+        <div className="table-responsive">
+          <table className="table table-hover align-middle">
+            <thead className="table-dark">
+              <tr>
+                <th>Service Type</th>
+                <th>Date</th>
+                <th>Mechanic</th>
+                <th>Cost</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="card mt-4 p-3">
-        <h4 className="mb-3">Add New Service</h4>
-        <div className="row g-2">
-          <div className="col-md-4">
-            <input type="text" className="form-control" placeholder="Service Type" value={newService.type} onChange={(e) => setNewService({ ...newService, type: e.target.value })} />
-          </div>
-          <div className="col-md-4">
-            <input type="date" className="form-control" value={newService.date} onChange={(e) => setNewService({ ...newService, date: e.target.value })} />
-          </div>
-          <div className="col-md-4">
-            <input type="text" className="form-control" placeholder="Mechanic Name" value={newService.mechanic} onChange={(e) => setNewService({ ...newService, mechanic: e.target.value })} />
-          </div>
-          <div className="col-md-3">
-            <input type="text" className="form-control" placeholder="Cost" value={newService.cost} onChange={(e) => setNewService({ ...newService, cost: e.target.value })} />
-          </div>
-          <div className="col-md-3">
-            <select className="form-control" value={newService.status} onChange={(e) => setNewService({ ...newService, status: e.target.value })}>
-              <option>Pending</option>
-              <option>In-Progress</option>
-              <option>Completed</option>
-            </select>
-          </div>
-          <div className="col-md-3">
-            <button className="btn btn-success w-100" onClick={handleAddService}><FiPlus /> Add Service</button>
-          </div>
+            </thead>
+            <tbody>
+              {services.filter(s => s.type.toLowerCase().includes(search.toLowerCase())).map((service, index) => (
+                <tr key={index}>
+                  <td>{service.type}</td>
+                  <td>{service.date}</td>
+                  <td>{service.mechanic}</td>
+                  <td>{service.cost}</td>
+                  <td>
+                    <span className={`badge ${service.status === "Completed" ? "bg-success" : "bg-warning"}`}>
+                      {service.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

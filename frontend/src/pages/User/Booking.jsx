@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import paintingImage from "../../assets/painting.jpg";
 import engineImage from "../../assets/engine.jpg";
 import tireImage from "../../assets/tire.jpg";
 import brakeImage from "../../assets/brake.jpg";
 import oilChangeImage from "../../assets/oil_change.jpg";
 import batteryImage from "../../assets/battery.jpg";
-import transmissionImage from "../../assets/transmission.jpg";
-import exhaustImage from "../../assets/exhaust.jpg";
-import acRepairImage from "../../assets/ac_repair.jpg";
-import alignmentImage from "../../assets/alignment.jpg";
-import detailingImage from "../../assets/detailing.jpg";
-import suspensionImage from "../../assets/suspension.jpg";
 
 const services = [
   { title: "Painting", img: paintingImage, description: "Give your car a fresh new look with our expert painting services." },
@@ -20,13 +16,7 @@ const services = [
   { title: "Tire & Wheel Services", img: tireImage, description: "Ensure safety and performance with our tire and wheel services." },
   { title: "Brake Repair", img: brakeImage, description: "Stay safe on the road with professional brake repair services." },
   { title: "Oil Change", img: oilChangeImage, description: "Extend your engine's lifespan with a quick and clean oil change." },
-  { title: "Battery Replacement", img: batteryImage, description: "Get a reliable battery replacement to avoid unexpected breakdowns." },
-  { title: "Transmission Repair", img: transmissionImage, description: "Smooth and efficient transmission for optimal vehicle performance." },
-  { title: "Exhaust System Repair", img: exhaustImage, description: "Improve fuel efficiency with expert exhaust system repairs." },
-  { title: "A/C Repair", img: acRepairImage, description: "Stay cool and comfortable with our air conditioning repair services." },
-  { title: "Wheel Alignment", img: alignmentImage, description: "Enhance handling and tire life with precision wheel alignment." },
-  { title: "Car Detailing", img: detailingImage, description: "Restore your car’s shine with a professional detailing service." },
-  { title: "Suspension Repair", img: suspensionImage, description: "Ensure a smooth ride with our expert suspension repair services." }
+  { title: "Battery Replacement", img: batteryImage, description: "Get a reliable battery replacement to avoid unexpected breakdowns." }
 ];
 
 const Booking = () => {
@@ -42,7 +32,7 @@ const Booking = () => {
     licensePlate: "",
     specialRequests: ""
   });
-  
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -51,13 +41,23 @@ const Booking = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Service booked successfully!");
-    navigate("/");
+    toast.success("Service booked successfully!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "colored",
+    });
+    setTimeout(() => navigate("/"), 3500);
   };
 
   return (
     <Container fluid className="py-5 pt-5" style={{ backgroundColor: "#d7ccc8", minHeight: "100vh" }}>
-      <Row className="justify-content-center" style={{ marginTop: "80px" }}>
+      <ToastContainer />
+      <Row className="justify-content-start align-items-start" style={{ marginTop: "80px" }}>
+        {/* Booking Form (Far Left) */}
         <Col md={4} className="mb-4">
           <Card className="p-4 shadow-lg" style={{ backgroundColor: "#8d6e63", color: "#fff" }}>
             <h2 className="text-center mb-4">Book a Service</h2>
@@ -92,19 +92,25 @@ const Booking = () => {
                 <Form.Label>Special Requests</Form.Label>
                 <Form.Control as="textarea" rows={3} name="specialRequests" placeholder="Any additional requests?" onChange={handleChange} />
               </Form.Group>
-              <Button variant="dark" type="submit" className="w-100" style={{ backgroundColor: "#5d4037", border: "none" }}>Book Now</Button>
+              <Button variant="dark" type="submit" className="w-100" style={{ backgroundColor: "#000", border: "none", marginTop: "2rem" }}>
+                Book Now
+              </Button>
             </Form>
           </Card>
         </Col>
-        <Col md={8}>
-          <Row className="g-3" style={{ marginTop: "50px" }}>
+
+        {/* Services (Right) */}
+        <Col md={7}>
+          <Row className="g-3">
             {services.map((service, index) => (
-              <Col key={index} md={3}>
+              <Col key={index} md={6}>
                 <Card className="h-100 shadow border-0" style={{ backgroundColor: "#d7ccc8" }}>
                   <Card.Img variant="top" src={service.img} style={{ height: "150px", objectFit: "cover" }} />
                   <Card.Body className="text-center">
                     <Card.Title>{service.title}</Card.Title>
-                    <Card.Text style={{ fontSize: "0.9rem", color: "#555" }}>{service.description}</Card.Text>
+                    <Card.Text style={{ fontSize: "1rem", fontWeight: "bold", color: "#333" }}>
+                      {service.description}
+                    </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>

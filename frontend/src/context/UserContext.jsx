@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+import "react-toastify/dist/ReactToastify.css";
+
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
@@ -21,41 +23,24 @@ export const UserProvider = ({ children }) => {
         })
         .then((resp) => resp.json())
         .then((response) => {
+            toast.dismiss();
             if (response.access_token) {
-                toast.dismiss();
                 sessionStorage.setItem("token", response.access_token);
                 setAuthToken(response.access_token);
-
-                fetch(" ", {
-                    method: "GET",
-                    headers: {
-                        'Content-type': 'application/json',
-                        Authorization: `Bearer ${response.access_token}`
-                    }
-                })
-                .then((response) => response.json())
-                .then((response) => {
-                    if (response.email) {
-                        setCurrentUser(response);
-                    }
-                });
-
+                fetchCurrentUser(response.access_token);
                 toast.success("Successfully Logged in");
                 navigate("/");
-            } else if (response.error) {
-                toast.dismiss();
-                toast.error(response.error);
             } else {
-                toast.dismiss();
-                toast.error("Failed to login");
+                toast.error(response.error || "Failed to login");
             }
         })
-        .catch((error) => {
+        .catch(() => {
             toast.dismiss();
             toast.error("Network error. Please try again.");
         });
     };
-    // LOGIN
+
+    // LOGIN WITH GOOGLE
     const login_with_google = (email) => {
         toast.loading("Logging you in...");
         fetch("http://127.0.0.1:5000/login_with_google", {
@@ -67,41 +52,24 @@ export const UserProvider = ({ children }) => {
         })
         .then((resp) => resp.json())
         .then((response) => {
+            toast.dismiss();
             if (response.access_token) {
-                toast.dismiss();
                 sessionStorage.setItem("token", response.access_token);
                 setAuthToken(response.access_token);
-
-                fetch(" ", {
-                    method: "GET",
-                    headers: {
-                        'Content-type': 'application/json',
-                        Authorization: `Bearer ${response.access_token}`
-                    }
-                })
-                .then((response) => response.json())
-                .then((response) => {
-                    if (response.email) {
-                        setCurrentUser(response);
-                    }
-                });
-
+                fetchCurrentUser(response.access_token);
                 toast.success("Successfully Logged in");
                 navigate("/");
-            } else if (response.error) {
-                toast.dismiss();
-                toast.error(response.error);
             } else {
-                toast.dismiss();
-                toast.error("Failed to login");
+                toast.error(response.error || "Failed to login");
             }
         })
-        .catch((error) => {
+        .catch(() => {
             toast.dismiss();
             toast.error("Network error. Please try again.");
         });
     };
 
+    // LOGOUT
     const logout = async () => {
         toast.loading("Logging out...");
         fetch("http://127.0.0.1:5000/logout", {
@@ -124,26 +92,21 @@ export const UserProvider = ({ children }) => {
             setCurrentUser(null);
             navigate("/login");
         })
-        .catch((error) => {
+        .catch(() => {
             toast.dismiss();
             toast.error("Network error. Please try again.");
         });
     };
-    
 
-    // Fetch current user
-    useEffect(() => {
-        if (authToken) {
-            fetchCurrentUser();
-        }
-    }, [authToken]);
+    // FETCH CURRENT USER
+    const fetchCurrentUser = (token = authToken) => {
+        if (!token) return;
 
-    const fetchCurrentUser = () => {
         fetch("http://127.0.0.1:5000/current_user", {
             method: "GET",
             headers: {
                 'Content-type': 'application/json',
-                Authorization: `Bearer ${authToken}`
+                Authorization: `Bearer ${token}`
             }
         })
         .then((response) => response.json())
@@ -152,16 +115,20 @@ export const UserProvider = ({ children }) => {
                 setCurrentUser(response);
             }
         })
-        .catch((error) => {
-            console.error("Failed to fetch current user", error);
+        .catch(() => {
+            toast.error("Session expired, logging out...");
             logout();
         });
     };
 
-    // ADD user
-    const addUser = (first_name, last_name, email, password) => {
+    useEffect(() => {
+        if (authToken) {
+            fetchCurrentUser();
+        }
+    }, [authToken]);
 
-        console.log("Registering user with:", { first_name, last_name, email }); 
+    // ADD USER
+    const addUser = (first_name, last_name, email, password) => {
         toast.loading("Registering...");
         fetch("http://127.0.0.1:5000/user", {
             method: "POST",
@@ -177,20 +144,15 @@ export const UserProvider = ({ children }) => {
         })
         .then((resp) => resp.json())
         .then((response) => {
+            toast.dismiss();
             if (response.msg) {  
-                toast.dismiss();
                 toast.success(response.msg);  
                 navigate("/login");
-            } else if (response.error) {
-                toast.dismiss();
-                toast.error(response.error);
             } else {
-                toast.dismiss();
-                toast.error("Failed to register");
+                toast.error(response.error || "Failed to register");
             }
         })
-        .catch((error) => {
-            console.error("Registration error:", error);  
+        .catch(() => {
             toast.dismiss();
             toast.error("Network error. Please try again.");
         });
