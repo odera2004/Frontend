@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AdminContext } from "../../context/AdminContext";
+import { toast } from "react-toastify";
 
 export default function Billing() {
+  const { billings, fetchBillings } = useContext(AdminContext);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    fetchBillings();
+  }, []);
+
+  const filteredBillings = billings.filter((bill) =>
+    bill.id.toString().includes(searchTerm) ||
+    bill.vehicle_plate?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="container-fluid mt-4">
       <h2 className="mb-4">Billing</h2>
 
-      {/* Search and Add Employee Panel */}
+      {/* Search Panel */}
       <div className="d-flex justify-content-between">
         <div className="input-group w-50">
-          <input type="text" className="form-control" placeholder="Search Invoice..." />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search Invoice..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <button className="btn btn-outline-secondary" type="button">
             Search
           </button>
@@ -27,33 +47,39 @@ export default function Billing() {
                 <tr>
                   <th>Invoice #</th>
                   <th>Work Order Number</th>
-                  <th>Vehicle Plate</th>
-                  <th>Technician</th>
+                  <th>Due Date</th>
+                  <th>Payment Date</th>
                   <th>Total Amount</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>#Inv-2023-001</td>
-                  <td>#WO-2023-001</td>
-                  <td>KDB 409N</td>
-                  <td>John Smith</td>
-                  <td>Ksh 80,908</td>
-                  <td>
-                    <span className="badge bg-success">PAID</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>#Inv-2023-003</td>
-                  <td>#WO-2023-002</td>
-                  <td>KAG 409N</td>
-                  <td>Bobby Shmurda</td>
-                  <td>Ksh 478,908</td>
-                  <td>
-                    <span className="badge bg-warning text-dark">UNPAID</span>
-                  </td>
-                </tr>
+                {filteredBillings.length > 0 ? (
+                  filteredBillings.map((bill) => (
+                    <tr key={bill.id}>
+                      <td>#Inv-{bill.id}</td>
+                      <td>#WO-{bill.work_order_id}</td>
+                      <td>{bill.due_date}</td>
+                      <td>{bill.payment_date}</td>
+                      <td>Ksh {bill.total_amount?.toLocaleString() || "0"}</td>
+                      <td>
+                        <span className={`badge ${
+                          bill.payment_status?.toLowerCase() === "paid"
+                            ? "bg-success"
+                            : "bg-warning text-dark"
+                        }`}>
+                          {bill.payment_status ? bill.payment_status.toUpperCase() : "Pending"}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="text-center">
+                      No billing records found
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -67,7 +93,9 @@ export default function Billing() {
           <div className="card text-white bg-danger shadow-sm">
             <div className="card-body text-center">
               <h5 className="card-title">Pending Payments</h5>
-              <p className="card-text display-6 fw-bold">Ksh 60,000</p>
+              <p className="card-text display-6 fw-bold">
+                Ksh {billings.filter(b => b.payment_status !== "Paid").reduce((sum, b) => sum + (b.total_amount || 0), 0).toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
@@ -77,7 +105,9 @@ export default function Billing() {
           <div className="card text-white bg-warning shadow-sm">
             <div className="card-body text-center">
               <h5 className="card-title">Total Payments</h5>
-              <p className="card-text display-6 fw-bold">Ksh 769,900</p>
+              <p className="card-text display-6 fw-bold">
+                Ksh {billings.reduce((sum, b) => sum + (b.total_amount || 0), 0).toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
