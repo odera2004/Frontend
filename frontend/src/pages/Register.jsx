@@ -44,7 +44,7 @@ export default function Register() {
   const handleGoogleSignUp = (credential) => {
     const user_details = jwtDecode(credential);
     addUser(user_details.given_name, user_details.family_name, user_details.email, "");
-    navigate("/dashboard");
+    navigate("/");
   };
 
   return (

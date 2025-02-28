@@ -1,129 +1,43 @@
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from 'react';
 
+// Create the context
 export const WorkOrderContext = createContext();
 
+// Create a provider component
 export const WorkOrderProvider = ({ children }) => {
-    const [workOrders, setWorkOrders] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+  const [workOrderData, setWorkOrderData] = useState(null);
 
-    const API_URL = "http://127.0.0.1:5000/work_orders";
+  // Function to create a new work order
+  const createWorkOrder = async (formData) => {
+    try {
+      const response = await fetch(' http://127.0.0.1:5000/work_order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          description: formData.service,
+          vehicle_id: formData.licensePlate, // assuming you want to store license plate as vehicle_id
+          status: 'Pending',
+        }),
+      });
 
-    // Fetch all work orders
-    const fetchWorkOrders = async () => {
-        setLoading(true);
-        try {
-            const response = await fetch(API_URL, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            if (!response.ok) throw new Error("Failed to fetch work orders");
-            const data = await response.json();
-            setWorkOrders(data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+      if (!response.ok) {
+        throw new Error('Error creating work order');
+      }
 
-    // Create a new work order
-    const createWorkOrder = async (workOrderData) => {
-        setLoading(true);
-        try {
-            const response = await fetch("http://127.0.0.1:5000/work_order", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(workOrderData),
-            });
-            if (!response.ok) throw new Error("Failed to create work order");
-            const newWorkOrder = await response.json();
-            setWorkOrders((prev) => [...prev, newWorkOrder]);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+      const result = await response.json();
+      setWorkOrderData(result);
+      return result; // Optionally return the created work order data
+    } catch (error) {
+      console.error('Error creating work order:', error);
+      return { error: error.message }; // Handle error gracefully
+    }
+  };
 
-    // Update a work order
-    const updateWorkOrder = async (id, workOrderData) => {
-        setLoading(true);
-        try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(workOrderData),
-            });
-            if (!response.ok) throw new Error("Failed to update work order");
-            const updatedOrder = await response.json();
-            setWorkOrders((prev) => prev.map((order) => (order.id === id ? updatedOrder : order)));
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Delete a work order
-    const deleteWorkOrder = async (id) => {
-        setLoading(true);
-        try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            if (!response.ok) throw new Error("Failed to delete work order");
-            setWorkOrders((prev) => prev.filter((order) => order.id !== id));
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Add parts to a work order
-    const addPartsToWorkOrder = async (workOrderId, partsData) => {
-        setLoading(true);
-        try {
-            const response = await fetch(`${API_URL}/${workOrderId}/parts`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(partsData),
-            });
-            if (!response.ok) throw new Error("Failed to add parts to work order");
-            const updatedParts = await response.json();
-            setWorkOrders((prev) =>
-                prev.map((order) =>
-                    order.id === workOrderId ? { ...order, parts: [...order.parts, updatedParts] } : order
-                )
-            );
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchWorkOrders();
-    }, []);
-
-    return (
-        <WorkOrderContext.Provider
-            value={{ workOrders, loading, error, createWorkOrder, updateWorkOrder, deleteWorkOrder, addPartsToWorkOrder }}
-        >
-            {children}
-        </WorkOrderContext.Provider>
-    );
+  return (
+    <WorkOrderContext.Provider value={{ workOrderData, createWorkOrder }}>
+      {children}
+    </WorkOrderContext.Provider>
+  );
 };
