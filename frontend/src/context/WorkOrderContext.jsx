@@ -10,7 +10,7 @@ export const WorkOrderProvider = ({ children }) => {
   // Function to create a new work order
   const createWorkOrder = async (formData) => {
     try {
-      const response = await fetch('http://localhost:5000/work_order', {
+      const response = await fetch(' http://127.0.0.1:5000/work_order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

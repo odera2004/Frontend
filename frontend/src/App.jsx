@@ -1,6 +1,8 @@
+
 // App.jsx
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
 
 import UserLayout from "./components/UserLayout";
 import AdminLayout from "./components/AdminLayout";
@@ -8,22 +10,26 @@ import EmployeeLayout from "./components/EmployeeLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/User/Home";
-import Vehicle from "./pages/User/Vehicle";
 import Work from "./pages/User/WorkOrder";
 import Billings from "./pages/User/Billings";
 import Booking from "./pages/User/Booking";
+import Profile from "./pages/User/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+
 import Dashboard from "./pages/Admin/Dashboard";
 import Employee from "./pages/Admin/Employee";
 import Billing from "./pages/Admin/Billing";
 import Stock from "./pages/Admin/Stock";
+
 import Task from "./pages/Employee/Task";
 import WorkOrder from "./pages/Employee/Workorder";
 import Checkout from "./pages/Employee/Checkout";
 import Quotation from "./pages/Employee/Quotation";
 
 import { UserProvider } from "./context/UserContext";
+
+
 import { AdminProvider } from "./context/AdminContext";
 import { PartsProvider } from "./context/PartsContext";
 import { EmployeeProvider } from "./context/EmployeeContext";

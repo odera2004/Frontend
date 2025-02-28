@@ -36,21 +36,39 @@ function Home() {
             Welcome!!!
           </h1>
           <p
-            className="lead"
-            style={{
-              fontSize: "1.25rem",
-              lineHeight: "1.6",
-              fontWeight: "bold",
-              color: "#333",
-            }}
-          >
-            Welcome to <strong>Auto Fix Hub</strong>, where your car gets the
-            attention it deserves! Whether it's a quick fix, a full service, or
-            a custom upgrade, we've got you covered.
-            <br /> Drive in, relax, and let us take care of the rest!
-          </p>
+  className="lead"
+  style={{
+    fontSize: "1.5rem",  // Bigger text
+    lineHeight: "1.8",  // Improved readability
+    fontWeight: "bold",
+    color: "#222",  // Darker text
+  }}
+>
+  Welcome to <strong>Auto Fix Hub</strong>, where your car gets the
+  attention it deserves! Whether it's a quick fix, a full service, or
+  a custom upgrade, we've got you covered.
+  <br /> Drive in, relax, and let us take care of the rest!
+</p>
+
         </div>
+        
       </section>
+      <div className="text-center mt-5">
+  <button 
+    className="btn btn-dark btn-lg" 
+    style={{
+      transition: "background 0.3s ease",
+      marginTop: "50px",  // 2 inches spacing
+      padding: "12px 24px", // Good button size
+    }}
+    onMouseEnter={(e) => e.target.style.background = "#333"}
+    onMouseLeave={(e) => e.target.style.background = "#000"}
+    onClick={() => navigate('/book')}
+  >
+    Book Now
+  </button>
+</div>
+
 
       {/* Why Choose Us */}
       <section className="text-center my-5">
@@ -96,7 +114,7 @@ function Home() {
       <section className="text-center my-5">
         <h2 className="fw-bold mb-4">How It Works</h2>
         <div className="row justify-content-center">
-          <div className="col-md-3">
+          <div className="col-md-4">
             <div className="card shadow border-0 p-3">
               <img
                 src="https://media.istockphoto.com/id/1212563205/photo/automotive-mechanic-young-men-checking-under-car-condition-in-garage-at-auto-repair-shop.jpg?s=612x612&w=0&k=20&c=jpq-BXnVo1pEcRdUihGIvWmYVGhsoNYfbmoWLxNPOgY="
@@ -107,7 +125,7 @@ function Home() {
               <p>Select what your car needs</p>
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
             <div className="card shadow border-0 p-3">
               <img
                 src="https://media.istockphoto.com/id/1405871410/photo/nurse-on-duty-working-on-computer-at-the-reception-desk-in-modern-clinic-and-looking-camera.jpg?s=612x612&w=0&k=20&c=pPW0wXrWYe7Z3OyBA6t9dAxkL7Mb3PaynF0hZOMw96I="
@@ -118,7 +136,7 @@ function Home() {
               <p>Pick a date and time</p>
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
             <div className="card shadow border-0 p-3">
               <img
                 src="https://media.istockphoto.com/id/612257332/photo/car-repair-garage.jpg?s=612x612&w=0&k=20&c=SHmKngKjlqApPOLo31p0obqq7yQ8-JtHB1jzV0_sVSA="
@@ -136,9 +154,8 @@ function Home() {
       <section className="text-center my-5">
         <h2 className="fw-bold">Ready to give your car the best care?</h2>
         <p className="lead">Book your service today!</p>
-        <button className="btn btn-success" onClick={() => navigate('/book')}>
-          Book Now
-        </button>
+      
+
       </section>
     </div>
   );

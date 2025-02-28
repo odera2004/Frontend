@@ -17,7 +17,7 @@ function Billings() {
 
       {/* Pending Billing */}
       <div className="card shadow-sm mb-4">
-        <div className="card-header bg-primary text-white text-center">
+        <div className="card-header bg-warning text-dark text-center">
           <h4 className="mb-0 text-uppercase">Pending Billing</h4>
         </div>
         <div className="card-body">
@@ -25,20 +25,20 @@ function Billings() {
             <table className="table table-bordered table-hover">
               <thead>
                 <tr className="bg-light text-center">
-                  <th scope="col" className="py-3">Invoice No</th>
-                  <th scope="col" className="py-3">Amount</th>
-                  <th scope="col" className="py-3">Due Date</th>
-                  <th scope="col" className="py-3">Status</th>
+                  <th scope="col" className="py-2">Invoice No</th>
+                  <th scope="col" className="py-2">Amount</th>
+                  <th scope="col" className="py-2">Due Date</th>
+                  <th scope="col" className="py-2">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {pendingBilling.length > 0 ? (
                   pendingBilling.map((bill) => (
                     <tr key={bill.id} className="text-center">
-                      <td className="py-4">{bill.invoice}</td>
-                      <td className="py-4">{bill.amount}</td>
-                      <td className="py-4">{bill.dueDate}</td>
-                      <td className="py-4">
+                      <td className="py-3">{bill.invoice}</td>
+                      <td className="py-3">{bill.amount}</td>
+                      <td className="py-3">{bill.dueDate}</td>
+                      <td className="py-3">
                         <span className="badge bg-warning text-dark">{bill.status}</span>
                       </td>
                     </tr>
@@ -56,7 +56,7 @@ function Billings() {
 
       {/* Previous Billing */}
       <div className="card shadow-sm">
-        <div className="card-header bg-secondary text-white text-center">
+        <div className="card-header bg-dark text-white text-center">
           <h4 className="mb-0 text-uppercase">Previous Billing</h4>
         </div>
         <div className="card-body">
@@ -64,20 +64,20 @@ function Billings() {
             <table className="table table-bordered table-hover">
               <thead>
                 <tr className="bg-light text-center">
-                  <th scope="col" className="py-3">Invoice No</th>
-                  <th scope="col" className="py-3">Amount</th>
-                  <th scope="col" className="py-3">Due Date</th>
-                  <th scope="col" className="py-3">Status</th>
+                  <th scope="col" className="py-2">Invoice No</th>
+                  <th scope="col" className="py-2">Amount</th>
+                  <th scope="col" className="py-2">Due Date</th>
+                  <th scope="col" className="py-2">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {previousBilling.length > 0 ? (
                   previousBilling.map((bill) => (
                     <tr key={bill.id} className="text-center">
-                      <td className="py-4">{bill.invoice}</td>
-                      <td className="py-4">{bill.amount}</td>
-                      <td className="py-4">{bill.dueDate}</td>
-                      <td className="py-4">
+                      <td className="py-3">{bill.invoice}</td>
+                      <td className="py-3">{bill.amount}</td>
+                      <td className="py-3">{bill.dueDate}</td>
+                      <td className="py-3">
                         <span className="badge bg-success">{bill.status}</span>
                       </td>
                     </tr>
@@ -96,4 +96,4 @@ function Billings() {
   );
 }
 
-export default Billings;  
+export default Billings;
