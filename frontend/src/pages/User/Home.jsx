@@ -9,7 +9,7 @@ function Home() {
     <div
       className="container-fluid px-0"
       style={{
-        paddingTop: "80px",
+        paddingTop: "20px",
         background: "rgba(169, 169, 169, 0.7)", 
       }}
     >
@@ -21,7 +21,7 @@ function Home() {
             alt="Car"
             className="img-fluid rounded shadow hero-image"
             style={{
-              maxWidth: "100%",
+              maxWidth: "150%",
               width: "600px",
               height: "auto",
               zIndex: 1, 
