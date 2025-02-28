@@ -1,3 +1,4 @@
+// Login.jsx
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { toast } from "react-toastify";
@@ -25,9 +26,8 @@ export default function Login() {
 
     try {
       await login(formData.email, formData.password);
-      setUserName(formData.email.split("@")[0]);
-      toast.success(`You've logged in successfully! Welcome, ${formData.email.split("@")[0]}`);
-      navigate("/");
+      // Navigation is now handled in the login function in UserContext
+      // based on the user's role
     } catch (error) {
       toast.error("Login failed. Please try again.");
     }
@@ -36,9 +36,8 @@ export default function Login() {
   const handleGoogleSignIn = (credential) => {
     const user_details = jwtDecode(credential);
     login_with_google(user_details.email);
-    setUserName(user_details.given_name);
-    toast.success(`You've logged in successfully! Welcome, ${user_details.given_name}`);
-    navigate("/");
+    // Navigation is now handled in the login_with_google function in UserContext
+    // based on the user's role
   };
 
   return (
