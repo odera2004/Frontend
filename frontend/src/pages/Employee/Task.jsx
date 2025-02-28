@@ -1,35 +1,70 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import { AdminContext } from '../../context/AdminContext';
 
 export default function Task() {
-    return (
-        <div className="content" style={{ padding: "20px", width: "100%" }}>
-            <h1 className="mb-4" style={{ color: '#343a40' }}>Pending Work Orders</h1>
+  const { workOrders, fetchWorkOrders } = useContext(AdminContext);
 
-            <div className="container mt-5">
-                <div className="card shadow-sm">
-                    <div className="card-header bg-light border-0">
-                        <h4 className="mb-100">Pending Work Orders</h4>
-                    </div>
-                    <div className="card-body">
-                        <div className="table-responsive">
-                            <table className="table table-hover">
-                                <thead>
-                                    <tr className="bg-light">
-                                        <th scope="col" className="py-3">Order ref</th>
-                                        <th scope="col" className="py-3">Vehicle</th>
-                                        <th scope="col" className="py-3">Issue</th>
-                                        <th scope="col" className="py-3">Technician</th>
-                                        <th scope="col" className="py-3">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {/* Work orders will be dynamically populated here */}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  useEffect(() => {
+    fetchWorkOrders(); // Fetch all work orders
+  }, [fetchWorkOrders]);
+
+  // Filter only pending work orders
+  const pendingWorkOrders = workOrders.filter(order => order.status.toLowerCase() === "pending");
+
+  return (
+    <div className="container-fluid" style={{ width: "100%" }}>
+      <h2 className="mb-4">Pending Work Orders</h2>
+
+      {/* Pending Work Orders Table */}
+      <div className="card mt-4">
+        <div className="card-body">
+          <h4 className="card-title">Pending Work Orders</h4>
+          <table className="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th>Work Order ID</th>
+                <th>Vehicle</th>
+                <th>Description</th>
+                <th>Technician</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pendingWorkOrders.length > 0 ? (
+                pendingWorkOrders.map((workOrder) => (
+                  <tr key={workOrder.id}>
+                    <td>{workOrder.id}</td>
+                    <td>{workOrder.vehicle_number_plate}</td>
+                    <td>{workOrder.description}</td>
+                    <td>{workOrder.technician}</td>
+                    <td>{workOrder.status}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center text-muted">
+                    No pending work orders
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-    );
+      </div>
+    </div>
+  );
+}
+
+// Helper function to get the status class
+function getStatusClass(status) {
+  switch (status?.toLowerCase()) {
+    case 'in progress':
+      return 'bg-primary';
+    case 'completed':
+      return 'bg-success';
+    case 'pending':
+      return 'bg-warning text-dark';
+    default:
+      return 'bg-secondary';
+  }
 }
