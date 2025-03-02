@@ -72,6 +72,7 @@ function App() {
           <WorkOrderProvider>
           <EmployeeProvider>
             <PaymentProvider>
+              <PartsProvider>
               <Routes>
                 {/* Public routes accessible to everyone */}
                 <Route path="/login" element={<Login />} />
@@ -114,9 +115,8 @@ function App() {
                 {/* Catch-all route for any undefined paths */}
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
+              </PartsProvider>
               </PaymentProvider>
-             <PartsProvider>
-            </PartsProvider>
           </EmployeeProvider>
           </WorkOrderProvider>
         </AdminProvider>
