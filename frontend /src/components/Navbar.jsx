@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Navbar = () => {
+  const { logout } = useContext(UserContext);
   return (
     <nav className="navbar navbar-expand-lg bg-dark">
       <div className="container-fluid"> 
@@ -38,12 +41,11 @@ const Navbar = () => {
             <li className="nav-item">
               <NavLink className="nav-link text-light" to="/profile" activeClassName="active">Profile</NavLink>
             </li>
+           
             <li className="nav-item">
-              <NavLink className="nav-link text-light" to="/login" activeClassName="active">Login</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link text-light" to="/register" activeClassName="active">Register</NavLink>
-
+              <button onClick={logout} className="nav-link text-light" style={{ cursor: "pointer", background: "none", border: "none" }}>
+                Logout
+              </button>
             </li>
           </ul>
         </div>

@@ -22,8 +22,8 @@ export const UserProvider = ({ children }) => {
     })
     .then((resp) => resp.json())
     .then((response) => {
+      toast.dismiss();
       if (response.access_token) {
-        toast.dismiss();
         sessionStorage.setItem("token", response.access_token);
         setAuthToken(response.access_token);
 
@@ -38,25 +38,20 @@ export const UserProvider = ({ children }) => {
         .then((response) => {
           if (response.email) {
             setCurrentUser(response);
-            // Store user role in sessionStorage
             const role = response.role ? response.role.toLowerCase() : "user";
             sessionStorage.setItem("userRole", role);
-            
-            // Redirect based on user role
             redirectBasedOnRole(role);
           }
         });
 
-        toast.success("Successfully Logged in");
-      } else if (response.error) {
-        toast.dismiss();
-        toast.error(response.error);
+        toast.success("Successfully Logged in 🎉");
+        console.log("Toast triggered");
+        
       } else {
-        toast.dismiss();
-        toast.error("Failed to login");
+        toast.error(response.error || "Failed to login ❌");
       }
     })
-    .catch((error) => {
+    .catch(() => {
       toast.dismiss();
       toast.error("Network error. Please try again.");
     });
@@ -74,8 +69,8 @@ export const UserProvider = ({ children }) => {
     })
     .then((resp) => resp.json())
     .then((response) => {
+      toast.dismiss();
       if (response.access_token) {
-        toast.dismiss();
         sessionStorage.setItem("token", response.access_token);
         setAuthToken(response.access_token);
 
@@ -90,32 +85,25 @@ export const UserProvider = ({ children }) => {
         .then((response) => {
           if (response.email) {
             setCurrentUser(response);
-            // Store user role in sessionStorage
             const role = response.role ? response.role.toLowerCase() : "user";
             sessionStorage.setItem("userRole", role);
-            
-            // Redirect based on user role
             redirectBasedOnRole(role);
           }
         });
 
-        toast.success("Successfully Logged in");
-      } else if (response.error) {
-        toast.dismiss();
-        toast.error(response.error);
+        toast.success("Logged in with Google 🌐");
       } else {
-        toast.dismiss();
-        toast.error("Failed to login");
+        toast.error(response.error || "Google login failed ❌");
       }
     })
-    .catch((error) => {
+    .catch(() => {
       toast.dismiss();
       toast.error("Network error. Please try again.");
     });
   };
 
   // LOGOUT
-  const logout = async () => {
+  const logout = () => {
     toast.loading("Logging out...");
     fetch("http://127.0.0.1:5000/logout", {
       method: "DELETE",
@@ -128,9 +116,9 @@ export const UserProvider = ({ children }) => {
     .then((response) => {
       toast.dismiss();
       if (response.success) {
-        toast.success(response.success);
+        toast.success("Logged out successfully! 🚀");
       } else {
-        toast.error(response.error || "Logout failed");
+        toast.error(response.error || "Logout failed ❌");
       }
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("userRole");
@@ -138,7 +126,7 @@ export const UserProvider = ({ children }) => {
       setCurrentUser(null);
       navigate("/login");
     })
-    .catch((error) => {
+    .catch(() => {
       toast.dismiss();
       toast.error("Network error. Please try again.");
     });
@@ -163,20 +151,19 @@ export const UserProvider = ({ children }) => {
     .then((response) => {
       if (response.email) {
         setCurrentUser(response);
-        // Store user role in sessionStorage
         const role = response.role ? response.role.toLowerCase() : "user";
         sessionStorage.setItem("userRole", role);
       }
     })
-    .catch((error) => {
-      console.error("Failed to fetch current user", error);
+    .catch(() => {
+      console.error("Failed to fetch current user");
       logout();
     });
   };
 
-  // ADD USER
+  // ADD USER (REGISTER)
   const addUser = (first_name, last_name, email, password) => {
-    console.log("Registering user with:", { first_name, last_name, email }); 
+    console.log("Registering user with:", { first_name, last_name, email });
     toast.loading("Registering...");
     fetch("http://127.0.0.1:5000/user", {
       method: "POST",
@@ -184,29 +171,19 @@ export const UserProvider = ({ children }) => {
         'Content-type': 'application/json',
         "Authorization": `Bearer ${authToken}` 
       },
-      body: JSON.stringify({
-        first_name, 
-        last_name, 
-        email, 
-        password
-      })
+      body: JSON.stringify({ first_name, last_name, email, password })
     })
     .then((resp) => resp.json())
     .then((response) => {
-      if (response.msg) {  
-        toast.dismiss();
-        toast.success(response.msg);  
+      toast.dismiss();
+      if (response.msg) {
+        toast.success("Account created successfully! 🎉");
         navigate("/login");
-      } else if (response.error) {
-        toast.dismiss();
-        toast.error(response.error);
       } else {
-        toast.dismiss();
-        toast.error("Failed to register");
+        toast.error(response.error || "Registration failed ❌");
       }
     })
-    .catch((error) => {
-      console.error("Registration error:", error);  
+    .catch(() => {
       toast.dismiss();
       toast.error("Network error. Please try again.");
     });

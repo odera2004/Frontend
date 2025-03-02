@@ -21,8 +21,8 @@ function Home() {
             alt="Car"
             className="img-fluid rounded shadow hero-image"
             style={{
-              maxWidth: "150%",
-              width: "600px",
+              maxWidth: "190%",
+              width: "800px",
               height: "auto",
               zIndex: 1, 
             }}
