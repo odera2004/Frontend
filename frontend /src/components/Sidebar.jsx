@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Sidebar = ({ role }) => {
+  const { logout } = useContext(UserContext); 
+
   const menuItems = {
     Admin: [
       { name: "Dashboard", path: "/dashboard" },
@@ -26,6 +30,28 @@ const Sidebar = ({ role }) => {
           </Link>
         ))}
       </nav>
+
+      {/* Logout Button */}
+      <div className="mt-auto"> {/* Pushes the button to the bottom */}
+        <button
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.1)", // White translucent background
+            color: "#333", // Dark grey text
+            border: "none", // Remove border
+            padding: "8px 16px", // Add padding
+            borderRadius: "4px", // Slightly rounded corners
+            width: "100%", // Full width
+            textAlign: "left", // Left-align text
+            cursor: "pointer", // Pointer cursor on hover
+            transition: "all 0.3s ease", // Smooth hover transition
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "rgba(255, 255, 255, 0.2)")} // Hover effect
+          onMouseOut={(e) => (e.target.style.backgroundColor = "rgba(255, 255, 255, 0.1)")} // Reset on mouse out
+          onClick={logout} // Call the logout function on button click
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

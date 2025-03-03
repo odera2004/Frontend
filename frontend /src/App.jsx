@@ -77,6 +77,7 @@ function App() {
         <AdminProvider>
           <WorkOrderProvider>
           <EmployeeProvider>
+            <PartsProvider>
             <PaymentProvider>
               <Routes>
                 {/* Public routes accessible to everyone */}
@@ -121,8 +122,7 @@ function App() {
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               </PaymentProvider>
-             <PartsProvider>
-            </PartsProvider>
+              </PartsProvider>
           </EmployeeProvider>
           </WorkOrderProvider>
         </AdminProvider>

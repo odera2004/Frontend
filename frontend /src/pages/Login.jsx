@@ -102,7 +102,7 @@ export default function Login() {
               handleGoogleSignIn(credentialResponse.credential);
             }}
             onError={() => {
-              toast.error("Google sign-in failed.");
+              toast.error("Google Login failed.");
             }}
           />
         </div>
