@@ -8,8 +8,8 @@ const Profile = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
   const [services, setServices] = useState([
-    { type: "Oil Change", date: "2025-02-15", mechanic: "Eugine", cost: "$50", status: "Completed" },
-    { type: "Brake Replacement", date: "2025-02-20", mechanic: "Mary", cost: "$120", status: "Pending" },
+    { type: "Oil Change", date: "2025-02-15", mechanic: "Eugine", cost: "6000", status: "Completed" },
+    { type: "Brake Replacement", date: "2025-02-20", mechanic: "Mary", cost: "12,000", status: "Pending" },
   ]);
   const [search, setSearch] = useState("");
 
