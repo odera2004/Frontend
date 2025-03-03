@@ -44,10 +44,11 @@ function Home() {
     color: "#222",  // Darker text
   }}
 >
-  Welcome to <strong>Auto Fix Hub</strong>, where your car gets the
-  attention it deserves! Whether it's a quick fix, a full service, or
-  a custom upgrade, we've got you covered.
-  <br /> Drive in, relax, and let us take care of the rest!
+Welcome to <strong>Auto Fix Hub</strong>, where your car gets the care it deserves! We know your vehicle is more than just transportation—it’s your daily companion. That’s why we offer top-quality services, from quick fixes and full-service check-ups to custom upgrades, ensuring your car runs smoothly and efficiently.
+
+Our expert team uses the latest technology and premium parts to handle everything from routine maintenance to complex repairs. Just drive in, relax, and let us do the rest.
+
+At <strong>Auto Fix Hub</strong>, we make car care simple, reliable, and hassle-free! 🚗💨
 </p>
 
         </div>

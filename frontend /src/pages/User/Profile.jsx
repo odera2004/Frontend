@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FiUpload, FiSearch, FiSun, FiMoon } from "react-icons/fi";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { UserContext } from "../../context/UserContext"; // Import UserContext
 
 const Profile = () => {
-  const [username, setUsername] = useState("Hafsa_Garage");
-  const [bio, setBio] = useState("Car enthusiast | Always keeping my ride fresh 🚗");
-  const [profileImage, setProfileImage] = useState(null);
+  const { current_user, fetchCurrentUser } = useContext(UserContext); // Access user details
   const [darkMode, setDarkMode] = useState(false);
-  const [services, setServices] = useState([
-    { type: "Oil Change", date: "2025-02-15", mechanic: "Eugine", cost: "6000", status: "Completed" },
-    { type: "Brake Replacement", date: "2025-02-20", mechanic: "Mary", cost: "12,000", status: "Pending" },
-  ]);
+  const [profileImage, setProfileImage] = useState(null);
   const [search, setSearch] = useState("");
+  
+  // Fetch user details on mount
+  useEffect(() => {
+    if (!current_user) {
+      fetchCurrentUser(); // Ensure user data is loaded
+    }
+  }, [current_user, fetchCurrentUser]);
+
+  // Ensure default values are not null
+  const username = current_user?.first_name + " " + current_user?.last_name || "User";
+  const bio = current_user?.bio || "Welcome to my profile!";
+  const services = current_user?.services || []; // Assuming `services` exist in user data
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -48,22 +56,8 @@ const Profile = () => {
           </label>
           <input type="file" id="imageUpload" className="d-none" onChange={handleImageUpload} accept="image/*" />
         </div>
-        <h3 className="mt-3">
-          <input
-            type="text"
-            className="form-control text-center border-0 fw-bold fs-4"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </h3>
-        <p>
-          <input
-            type="text"
-            className="form-control text-center border-0 text-muted"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-          />
-        </p>
+        <h3 className="mt-3">{username}</h3>
+        <p>{bio}</p>
       </div>
 
       {/* Service History */}
@@ -98,6 +92,11 @@ const Profile = () => {
                   </td>
                 </tr>
               ))}
+              {services.length === 0 && (
+                <tr>
+                  <td colSpan="5" className="text-center text-muted">No services found</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

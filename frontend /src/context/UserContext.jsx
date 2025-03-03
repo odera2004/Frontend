@@ -31,7 +31,7 @@ export const UserProvider = ({ children }) => {
           method: "GET",
           headers: {
             'Content-type': 'application/json',
-            Authorization: `Bearer ${response.access_token}`
+            "Authorization": `Bearer ${response.access_token}`
           }
         })
         .then((response) => response.json())
@@ -78,7 +78,7 @@ export const UserProvider = ({ children }) => {
           method: "GET",
           headers: {
             'Content-type': 'application/json',
-            Authorization: `Bearer ${response.access_token}`
+            "Authorization": `Bearer ${response.access_token}`
           }
         })
         .then((response) => response.json())
@@ -109,7 +109,7 @@ export const UserProvider = ({ children }) => {
       method: "DELETE",
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer ${authToken}`
+        "Authorization": `Bearer ${authToken}`
       }
     })
     .then((response) => response.json())
@@ -144,7 +144,7 @@ export const UserProvider = ({ children }) => {
       method: "GET",
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer ${authToken}`
+        "Authorization": `Bearer ${authToken}`
       }
     })
     .then((response) => response.json())
