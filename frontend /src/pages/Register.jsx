@@ -38,7 +38,7 @@ export default function Register() {
 
     addUser(formData.first_name, formData.last_name, formData.email, formData.password);
     setMessage("Account created successfully!");
-    setTimeout(() => navigate("/login"), 2000);
+    setTimeout(() => navigate("/login"), 4000);
   };
 
   const handleGoogleSignUp = (credential) => {
