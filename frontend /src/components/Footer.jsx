@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaInstagram, FaPhoneAlt } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
-import { SiYoutube } from "react-icons/si";
-import { RiLinkedinBoxFill } from "react-icons/ri";
 import { MdOutlineMail } from "react-icons/md";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -17,23 +15,13 @@ function Footer() {
             <h5>QUICK LINKS</h5>
             <ul className="list-unstyled d-flex gap-3">
               <li>
-                <Link to="/x" className="text-white fs-4">
+                <Link to="https://x.com/?lang=en" className="text-white fs-4">
                   <BsTwitterX />
                 </Link>
               </li>
               <li>
                 <Link to="/instagram" className="text-white fs-4">
                   <FaInstagram />
-                </Link>
-              </li>
-              <li>
-                <Link to="/youtube" className="text-white fs-4">
-                  <SiYoutube />
-                </Link>
-              </li>
-              <li>
-                <Link to="/linkedin" className="text-white fs-4">
-                  <RiLinkedinBoxFill />
                 </Link>
               </li>
             </ul>

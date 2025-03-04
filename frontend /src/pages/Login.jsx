@@ -95,6 +95,9 @@ export default function Login() {
         <p className="text-center mt-3">
           Don't have an account? <a href="/register" className="text-warning fw-bold">Register here</a>
         </p>
+        <p className="text-center mt-3">
+          forgot password? <a href="/forgot-password" className="text-warning fw-bold">click here</a>
+        </p>
         <div className="text-center mt-4">
           <p>Or sign in with</p>
           <GoogleLogin

@@ -7,6 +7,8 @@ import UserLayout from "./components/UserLayout";
 import AdminLayout from "./components/AdminLayout";
 import EmployeeLayout from "./components/EmployeeLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ForgotPassword from "./pages/ForgortPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 import Home from "./pages/User/Home";
 import Work from "./pages/User/WorkOrder";
@@ -79,6 +81,8 @@ function App() {
                   <Routes>
                     {/* Public routes accessible to everyone */}
                     <Route path="/login" element={<Login />} />
+                    <Route path = "/reset-password/:token" element={<ResetPassword />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/register" element={<Register />} />
 
                     {/* Default route redirects based on role */}
