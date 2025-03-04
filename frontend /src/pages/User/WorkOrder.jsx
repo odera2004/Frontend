@@ -1,19 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext } from 'react';
+import { WorkOrderContext } from '../../context/WorkOrderContext';
 
-function WorkOrders() {
-  const [activeOrders, setActiveOrders] = useState([
-    { id: 1, orderRef: "WO-001", vehicle: "Toyota Corolla", issue: "Engine overheating", technician: "Hafsa Abdy", status: "In Progress" },
-    { id: 2, orderRef: "WO-002", vehicle: "Honda Civic", issue: "Brake failure", technician: "Jared Smith", status: "Assigned" },
-    { id: 3, orderRef: "WO-005", vehicle: "Chevrolet Malibu", issue: "Transmission issue", technician: "Alex Roe", status: "In Progress" },
-    { id: 4, orderRef: "WO-006", vehicle: "Mazda 3", issue: "Suspension repair", technician: "Emma Lee", status: "Assigned" }
-  ]);
+export default function WorkOrders() {
+  const { activeWorkOrders, previousWorkOrders, loading } = useContext(WorkOrderContext);
 
-  const [previousOrders, setPreviousOrders] = useState([
-    { id: 5, orderRef: "WO-003", vehicle: "Ford Focus", issue: "Oil change", technician: "Douyin", status: "Completed" },
-    { id: 6, orderRef: "WO-004", vehicle: "BMW X5", issue: "Battery replacement", technician: "Sunghoon", status: "Completed" },
-    { id: 7, orderRef: "WO-007", vehicle: "Hyundai Elantra", issue: "Tire replacement", technician: "Jayden Kim", status: "Completed" },
-    { id: 8, orderRef: "WO-008", vehicle: "Nissan Altima", issue: "Brake inspection", technician: "Sara Wong", status: "Completed" }
-  ]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mt-5">
@@ -37,23 +30,25 @@ function WorkOrders() {
                     </tr>
                   </thead>
                   <tbody>
-                    {activeOrders.length > 0 ? (
-                      activeOrders.map((order) => (
+                    {activeWorkOrders.length > 0 ? (
+                      activeWorkOrders.map((order) => (
                         <tr key={order.id}>
-                          <td>{order.orderRef}</td>
-                          <td>{order.vehicle}</td>
-                          <td>{order.issue}</td>
+                          <td>#WO -{order.id}</td>
+                          <td>{order.vehicle_number_plate}</td>
+                          <td>{order.description}</td>
                           <td>{order.technician}</td>
                           <td>
-                            <span
-                              className={`badge ${
-                                order.status === "In Progress"
-                                  ? "bg-warning text-dark"
-                                  : "bg-secondary"
-                              }`}
-                            >
-                              {order.status}
-                            </span>
+                          <span
+                          className={`badge ${order.status === "in progress"
+                            ? "bg-warning text-dark"  
+                            : order.status === "Pending"
+                              ? "bg-info text-dark" 
+                              : "bg-secondary"
+                          }`}
+                        >
+                          {order.status}
+                        </span>
+
                           </td>
                         </tr>
                       ))
@@ -90,12 +85,12 @@ function WorkOrders() {
                     </tr>
                   </thead>
                   <tbody>
-                    {previousOrders.length > 0 ? (
-                      previousOrders.map((order) => (
+                    {previousWorkOrders.length > 0 ? (
+                      previousWorkOrders.map((order) => (
                         <tr key={order.id}>
-                          <td>{order.orderRef}</td>
-                          <td>{order.vehicle}</td>
-                          <td>{order.issue}</td>
+                          <td>{order.id}</td>
+                          <td>{order.vehicle_number_plate}</td>
+                          <td>{order.description}</td>
                           <td>{order.technician}</td>
                           <td>
                             <span className="badge bg-success">
@@ -121,5 +116,3 @@ function WorkOrders() {
     </div>
   );
 }
-
-export default WorkOrders;
