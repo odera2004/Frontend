@@ -9,6 +9,29 @@ export const WorkOrderProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const { current_user } = useContext(UserContext);  // Get the current user
 
+  // Function to create a new work order
+  const createWorkOrder = async (workOrderData) => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/work_order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(workOrderData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create work order');
+      }
+
+      const data = await response.json();
+      return data; // Return the created work order data
+    } catch (error) {
+      console.error('Error creating work order:', error);
+      return { error: error.message }; 
+    }
+  };
+
   // Function to fetch active work orders for the current user
   const fetchActiveWorkOrders = async () => {
     try {
@@ -67,6 +90,7 @@ export const WorkOrderProvider = ({ children }) => {
       activeWorkOrders,
       previousWorkOrders,
       loading,
+      createWorkOrder, // Include createWorkOrder in the context value
     }}>
       {children}
     </WorkOrderContext.Provider>
