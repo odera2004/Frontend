@@ -29,6 +29,7 @@ import { PartsProvider } from "./context/PartsContext";
 import { EmployeeProvider } from "./context/EmployeeContext";
 import { PaymentProvider } from "./context/PaymentContext";
 import { WorkOrderProvider } from "./context/WorkOrderContext";
+import { BillingProvider } from "./context/BillingContext";
 
 function HomeRedirect() {
   const [redirectPath, setRedirectPath] = useState(null);
@@ -72,6 +73,7 @@ function App() {
           <WorkOrderProvider>
           <EmployeeProvider>
             <PaymentProvider>
+              <BillingProvider>
               <PartsProvider>
               <Routes>
                 {/* Public routes accessible to everyone */}
@@ -116,6 +118,7 @@ function App() {
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               </PartsProvider>
+              </BillingProvider>
               </PaymentProvider>
           </EmployeeProvider>
           </WorkOrderProvider>
