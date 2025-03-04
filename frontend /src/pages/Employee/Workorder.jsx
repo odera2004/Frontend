@@ -10,24 +10,21 @@ export default function AddWorkOrder() {
     const [customerId, setCustomerId] = useState(null);
     const [technicianId, setTechnicianId] = useState("");
     const [guardId, setGuardId] = useState("");
-    const [vehicleId, setVehicleId] = useState("");
+    const [number_plate,setNumberPlate] =useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const [technicians, setTechnicians] = useState([]);
     const [guards, setGuards] = useState([]);
-    const [vehicles, setVehicles] = useState([]);
-
+    
     // Fetch technicians, guards, and vehicles
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const resTechnicians = await fetch("http://127.0.0.1:5000/technicians");
                 const resGuards = await fetch("http://127.0.0.1:5000/guards");
-                const resVehicles = await fetch("http://127.0.0.1:5000/vehicles");
 
                 setTechnicians(await resTechnicians.json());
                 setGuards(await resGuards.json());
-                setVehicles(await resVehicles.json());
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -40,7 +37,7 @@ export default function AddWorkOrder() {
         setErrorMessage("");
         setCustomerId(null);
     
-        if (!email.trim()) {  // Trim whitespace before checking
+        if (!email.trim()) {  
             setErrorMessage("Please enter a valid email.");
             return;
         }
@@ -61,8 +58,6 @@ export default function AddWorkOrder() {
         }
     };
     
-    
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!customerId) {
@@ -76,7 +71,7 @@ export default function AddWorkOrder() {
             user_id: customerId,
             technician_id: technicianId,
             guard_id: guardId,
-            vehicle_id: vehicleId || null, // Optional field
+            number_plate
         };
 
         addWorkOrder(newWorkOrder);
@@ -154,22 +149,17 @@ export default function AddWorkOrder() {
                     </select>
                 </div>
 
-                {/* Vehicle Dropdown (Optional) */}
+                {/* Vehicle Dropdown */}
                 <div className="mb-3">
-                    <label htmlFor="vehicleId" className="form-label">Vehicle Number Plate (Optional)</label>
-                    <select
+                    <label htmlFor="NumberPlate" className="form-label">Vehicle Number Plate </label>
+                    <input
+                        type="text"
                         className="form-control"
-                        id="vehicleId"
-                        value={vehicleId}
-                        onChange={(e) => setVehicleId(e.target.value)}
-                    >
-                        <option value="">No Vehicle</option>
-                        {vehicles.map((vehicle) => (
-                            <option key={vehicle.id} value={vehicle.id}>
-                                {vehicle.number_plate} - {vehicle.car_model}
-                            </option>
-                        ))}
-                    </select>
+                        id="NumberPlate"
+                        value={number_plate}
+                        onChange={(e) => setNumberPlate(e.target.value)}
+                        placeholder="Enter Plate in format ABC-123A"
+                    />
                 </div>
 
                 <div className="d-grid gap-2">

@@ -34,7 +34,7 @@ export default function WorkOrders() {
                       activeWorkOrders.map((order) => (
                         <tr key={order.id}>
                           <td>#WO -{order.id}</td>
-                          <td>{order.vehicle_number_plate}</td>
+                          <td>{order.number_plate}</td>
                           <td>{order.description}</td>
                           <td>{order.technician}</td>
                           <td>
@@ -89,7 +89,7 @@ export default function WorkOrders() {
                       previousWorkOrders.map((order) => (
                         <tr key={order.id}>
                           <td>{order.id}</td>
-                          <td>{order.vehicle_number_plate}</td>
+                          <td>{order.number_plate}</td>
                           <td>{order.description}</td>
                           <td>{order.technician}</td>
                           <td>

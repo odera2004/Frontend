@@ -94,7 +94,7 @@ export default function Task() {
                                         pendingAndInProgressWorkOrders.map((workOrder) => (
                                             <tr key={workOrder.id}>
                                                 <td>{workOrder.id}</td>
-                                                <td>{workOrder.vehicle_number_plate}</td>
+                                                <td>{workOrder.number_plate}</td>
                                                 <td>{workOrder.description}</td>
                                                 <td>{workOrder.technician}</td>
                                                 <td>{workOrder.status}</td>
@@ -133,7 +133,7 @@ export default function Task() {
                                         workOrdersAssignedToMe.map((workOrder) => (
                                             <tr key={workOrder.id}>
                                                 <td>{workOrder.id}</td>
-                                                <td>{workOrder.vehicle_number_plate}</td>
+                                                <td>{workOrder.number_plate}</td>
                                                 <td>{workOrder.description}</td>
                                                 <td>{workOrder.technician}</td>
                                                 <td>{workOrder.status}</td>

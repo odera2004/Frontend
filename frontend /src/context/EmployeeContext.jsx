@@ -61,7 +61,7 @@ export const EmployeeProvider = ({ children }) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ vehicle_plate: vehiclePlate }),
+                body: JSON.stringify({ number_plate: vehiclePlate }),
             });
             const data = await response.json();
 

@@ -101,7 +101,7 @@ export default function Dashboard() {
                             {sortedWorkOrders.map((workOrder) => (
                                 <tr key={workOrder.id}>
                                     <td>{workOrder.id}</td>
-                                    <td>{workOrder.vehicle_number_plate}</td>
+                                    <td>{workOrder.number_plate}</td>
                                     <td>{workOrder.description}</td>
                                     <td>{workOrder.technician}</td>
                                     <td>

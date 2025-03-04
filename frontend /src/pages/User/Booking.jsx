@@ -89,7 +89,7 @@ const Booking = () => {
       user_id: userId, // Retrieved from the email validation
       technician_id: formData.technicianId, // Selected technician
       status: "Pending", // Default status
-      vehicle_id: formData.licensePlate || null, // Optional
+      number_plate: formData.licensePlate || null, // Optional
     };
 
     // Send the work order data to the backend
@@ -162,7 +162,7 @@ const Booking = () => {
                 <Form.Control
                   type="email"
                   name="email"
-                  placeholder="Enter your email"
+                  placeholder="Enter your registered email"
                   value={formData.email}
                   onChange={handleChange}
                   required
@@ -183,10 +183,10 @@ const Booking = () => {
                 </Form.Select>
               </Form.Group>
 
-              {/* License Plate Input (Optional) */}
+              {/* License Plate Input  */}
               <Form.Group className="mb-3">
-                <Form.Label>License Plate (Optional)</Form.Label>
-                <Form.Control type="text" name="licensePlate" placeholder="Enter license plate" onChange={handleChange} />
+                <Form.Label>License Plate</Form.Label>
+                <Form.Control type="text" name="licensePlate" placeholder="Format is ABC-123A" onChange={handleChange} required/>
               </Form.Group>
 
               {/* Submit Button */}
