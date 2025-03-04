@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext } from 'react';
+import { BillingContext } from '../../context/BillingContext';
 
-function Billings() {  
-  const [pendingBilling, setPendingBilling] = useState([
-    { id: 1, invoice: "INV-001", amount: "$200", dueDate: "2025-03-10", status: "Pending" },
-    { id: 2, invoice: "INV-002", amount: "$450", dueDate: "2025-03-15", status: "Pending" }
-  ]);
+function Billings() {
+  const { pendingBillings, previousBillings, loading } = useContext(BillingContext);
 
-  const [previousBilling, setPreviousBilling] = useState([
-    { id: 3, invoice: "INV-003", amount: "$150", dueDate: "2025-02-01", status: "Paid" },
-    { id: 4, invoice: "INV-004", amount: "$300", dueDate: "2025-02-05", status: "Paid" }
-  ]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mt-5 w-100 mx-auto">
@@ -26,20 +23,22 @@ function Billings() {
               <thead>
                 <tr className="bg-light text-center">
                   <th scope="col" className="py-3">Invoice No</th>
+                  <th scope="col" className="py-3">Work Order No</th>
                   <th scope="col" className="py-3">Amount</th>
                   <th scope="col" className="py-3">Due Date</th>
                   <th scope="col" className="py-3">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {pendingBilling.length > 0 ? (
-                  pendingBilling.map((bill) => (
+                {pendingBillings.length > 0 ? (
+                  pendingBillings.map((bill) => (
                     <tr key={bill.id} className="text-center">
-                      <td className="py-4">{bill.invoice}</td>
-                      <td className="py-4">{bill.amount}</td>
-                      <td className="py-4">{bill.dueDate}</td>
+                      <td className="py-4">INV-{bill.id}</td>
+                      <td className="py-4">WO-{bill.work_order_id}</td>
+                      <td className="py-4">Ksh {bill.total_amount}</td>
+                      <td className="py-4">{new Date(bill.due_date).toLocaleDateString()}</td>
                       <td className="py-4">
-                        <span className="badge bg-warning text-dark">{bill.status}</span>
+                        <span className="badge bg-warning text-dark">{bill.payment_status}</span>
                       </td>
                     </tr>
                   ))
@@ -65,20 +64,22 @@ function Billings() {
               <thead>
                 <tr className="bg-light text-center">
                   <th scope="col" className="py-3">Invoice No</th>
+                  <th scope="col" className="py-3">Work Order No</th>
                   <th scope="col" className="py-3">Amount</th>
                   <th scope="col" className="py-3">Due Date</th>
                   <th scope="col" className="py-3">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {previousBilling.length > 0 ? (
-                  previousBilling.map((bill) => (
+                {previousBillings.length > 0 ? (
+                  previousBillings.map((bill) => (
                     <tr key={bill.id} className="text-center">
-                      <td className="py-4">{bill.invoice}</td>
-                      <td className="py-4">{bill.amount}</td>
-                      <td className="py-4">{bill.dueDate}</td>
+                      <td className="py-4">INV-{bill.id}</td>
+                      <td className="py-4">WO-{bill.work_order_id}</td>
+                      <td className="py-4">Ksh {bill.total_amount}</td>
+                      <td className="py-4">{new Date(bill.due_date).toLocaleDateString()}</td>
                       <td className="py-4">
-                        <span className="badge bg-success">{bill.status}</span>
+                        <span className="badge bg-success">{bill.payment_status}</span>
                       </td>
                     </tr>
                   ))
@@ -96,4 +97,4 @@ function Billings() {
   );
 }
 
-export default Billings;  
+export default Billings;

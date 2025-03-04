@@ -34,6 +34,7 @@ import { PartsProvider } from "./context/PartsContext";
 import { EmployeeProvider } from "./context/EmployeeContext";
 import { PaymentProvider } from "./context/PaymentContext";
 import { WorkOrderProvider } from "./context/WorkOrderContext";
+import { BillingContext, BillingProvider } from "./context/BillingContext";
 
 function HomeRedirect() {
   const [redirectPath, setRedirectPath] = useState(null);
@@ -77,7 +78,8 @@ function App() {
           <WorkOrderProvider>
             <EmployeeProvider>
               <PaymentProvider>
-                <PartsProvider>
+                <BillingProvider>
+                 <PartsProvider>
                   <Routes>
                     {/* Public routes accessible to everyone */}
                     <Route path="/login" element={<Login />} />
@@ -85,47 +87,49 @@ function App() {
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/register" element={<Register />} />
 
-                    {/* Default route redirects based on role */}
-                    <Route path="/" element={<HomeRedirect />} />
 
-                    {/* User routes with User layout */}
-                    <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
-                      <Route element={<UserLayout />}>
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/work" element={<Work />} />
-                        <Route path="/billings" element={<Billings />} />
-                        <Route path="/book" element={<Booking />} />
+                      {/* Default route redirects based on role */}
+                      <Route path="/" element={<HomeRedirect />} />
+
+                      {/* User routes with User layout */}
+                      <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
+                        <Route element={<UserLayout />}>
+                          <Route path="/home" element={<Home />} />
+                          <Route path="/profile" element={<Profile />} />
+                          <Route path="/work" element={<Work />} />
+                          <Route path="/billings" element={<Billings />} />
+                          <Route path="/book" element={<Booking />} />
+                        </Route>
                       </Route>
-                    </Route>
 
-                    {/* Admin routes with Admin layout */}
-                    <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-                      <Route element={<AdminLayout />}>
-                        <Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/employee" element={<Employee />} />
-                        <Route path="/billing" element={<Billing />} />
-                        <Route path="/stock" element={<Stock />} />
+                      {/* Admin routes with Admin layout */}
+                      <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+                        <Route element={<AdminLayout />}>
+                          <Route path="/dashboard" element={<Dashboard />} />
+                          <Route path="/employee" element={<Employee />} />
+                          <Route path="/billing" element={<Billing />} />
+                          <Route path="/stock" element={<Stock />} />
+                        </Route>
                       </Route>
-                    </Route>
 
-                    {/* Employee routes with Employee layout - Now accessible to both technician and guard */}
-                    <Route element={<ProtectedRoute allowedRoles={["technician", "guard"]} />}>
-                      <Route element={<EmployeeLayout />}>
-                        <Route path="/task" element={<Task />} />
-                        <Route path="/issue" element={<WorkOrder />} />
-                        <Route path="/checkout" element={<Checkout />} />
-                        <Route path="/quotation" element={<Quotation />} />
+                      {/* Employee routes with Employee layout - Now accessible to both technician and guard */}
+                      <Route element={<ProtectedRoute allowedRoles={["technician", "guard"]} />}>
+                        <Route element={<EmployeeLayout />}>
+                          <Route path="/task" element={<Task />} />
+                          <Route path="/issue" element={<WorkOrder />} />
+                          <Route path="/checkout" element={<Checkout />} />
+                          <Route path="/quotation" element={<Quotation />} />
+                        </Route>
                       </Route>
-                    </Route>
 
-                    {/* Catch-all route for any undefined paths */}
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                  </Routes>
+                      {/* Catch-all route for any undefined paths */}
+                      <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
 
                   {/* ToastContainer for notifications */}
                   <ToastContainer position="top-right" autoClose={6000} />
-                </PartsProvider>
+                  </PartsProvider>
+                </BillingProvider> 
               </PaymentProvider>
             </EmployeeProvider>
           </WorkOrderProvider>

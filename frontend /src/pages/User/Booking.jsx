@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,27 +23,77 @@ const services = [
 
 const Booking = () => {
   const [formData, setFormData] = useState({
-    service: "",
+    service: "", 
     date: "",
     time: "",
-    name: "",
-    email: "",
-    licensePlate: "",
-    specialRequests: ""
+    email: "", 
+    technicianId: "", 
+    licensePlate: "", 
   });
 
+  const [technicians, setTechnicians] = useState([]); 
+  const [errorMessage, setErrorMessage] = useState(""); 
   const navigate = useNavigate();
-  const { createWorkOrder } = useContext(WorkOrderContext); // Access the createWorkOrder function from context
+  const { createWorkOrder } = useContext(WorkOrderContext); 
+
+  // Fetch technicians from the backend
+  useEffect(() => {
+    const fetchTechnicians = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:5000/technicians");
+        if (!response.ok) {
+          throw new Error("Failed to fetch technicians");
+        }
+        const data = await response.json();
+        setTechnicians(data);
+      } catch (error) {
+        console.error("Error fetching technicians:", error);
+      }
+    };
+
+    fetchTechnicians();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Function to validate email and fetch user ID
+  const validateEmailAndFetchUserId = async (email) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/users/email/${encodeURIComponent(email)}`);
+      if (!response.ok) {
+        throw new Error("User not found");
+      }
+      const data = await response.json();
+      return data.id; // Return the user ID
+    } catch (error) {
+      console.error("Error validating email:", error);
+      setErrorMessage("User not found. Please enter a valid email.");
+      return null;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Send the work order data to backend using the fetch API
-    const result = await createWorkOrder(formData);
+    // Validate email and fetch user ID
+    const userId = await validateEmailAndFetchUserId(formData.email);
+    if (!userId) {
+      return; // Stop if user ID is not found
+    }
+
+    // Prepare work order data with user ID
+    const workOrderData = {
+      description: formData.service, // Use the selected service as the description
+      user_id: userId, // Retrieved from the email validation
+      technician_id: formData.technicianId, // Selected technician
+      status: "Pending", // Default status
+      vehicle_id: formData.licensePlate || null, // Optional
+    };
+
+    // Send the work order data to the backend
+    const result = await createWorkOrder(workOrderData);
 
     if (result && !result.error) {
       toast.success("Service booked successfully!", {
@@ -77,33 +127,77 @@ const Booking = () => {
           <Card className="p-4 shadow-lg" style={{ backgroundColor: "#8d6e63", color: "#fff" }}>
             <h2 className="text-center mb-4">Book a Service</h2>
             <Form onSubmit={handleSubmit}>
+              {/* Service Dropdown */}
               <Form.Group className="mb-3">
                 <Form.Label>Service Type</Form.Label>
                 <Form.Select name="service" onChange={handleChange} required>
                   <option value="">Select a service</option>
                   {services.map((service, index) => (
-                    <option key={index} value={service.title}>{service.title}</option>
+                    <option key={index} value={service.title}>
+                      {service.title}
+                    </option>
                   ))}
                 </Form.Select>
               </Form.Group>
+
+              {/* Date and Time Inputs */}
               <Row>
-                <Col md={6}><Form.Group className="mb-3"><Form.Label>Date</Form.Label><Form.Control type="date" name="date" onChange={handleChange} required /></Form.Group></Col>
-                <Col md={6}><Form.Group className="mb-3"><Form.Label>Time</Form.Label><Form.Control type="time" name="time" onChange={handleChange} required /></Form.Group></Col>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control type="date" name="date" onChange={handleChange} required />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Time</Form.Label>
+                    <Form.Control type="time" name="time" onChange={handleChange} required />
+                  </Form.Group>
+                </Col>
               </Row>
-              <Form.Group className="mb-3"><Form.Label>Name</Form.Label><Form.Control type="text" name="name" placeholder="Enter your name" onChange={handleChange} required /></Form.Group>
-              <Row>
-                <Col md={6}><Form.Group className="mb-3"><Form.Label>Email</Form.Label><Form.Control type="email" name="email" placeholder="Enter email" onChange={handleChange} required /></Form.Group></Col>
-              </Row>
+
+              {/* Email Input */}
+              <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                {errorMessage && <small className="text-danger">{errorMessage}</small>}
+              </Form.Group>
+
+              {/* Technician Dropdown */}
+              <Form.Group className="mb-3">
+                <Form.Label>Technician</Form.Label>
+                <Form.Select name="technicianId" onChange={handleChange} required>
+                  <option value="">Select a technician</option>
+                  {technicians.map((tech) => (
+                    <option key={tech.id} value={tech.id}>
+                      {tech.first_name} {tech.last_name} - {tech.skill_set}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+
+              {/* License Plate Input (Optional) */}
               <Form.Group className="mb-3">
                 <Form.Label>License Plate (Optional)</Form.Label>
                 <Form.Control type="text" name="licensePlate" placeholder="Enter license plate" onChange={handleChange} />
               </Form.Group>
+
+              {/* Submit Button */}
               <Button variant="dark" type="submit" className="w-100" style={{ backgroundColor: "#000", border: "none", marginTop: "2rem" }}>
                 Book Now
               </Button>
             </Form>
           </Card>
         </Col>
+
+        {/* Service Cards */}
         <Col md={7}>
           <Row className="g-3">
             {services.map((service, index) => (
