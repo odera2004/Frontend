@@ -1,30 +1,31 @@
 import { useState, useContext, useEffect } from "react";
-import { FiUpload, FiSearch, FiSun, FiMoon, FiEdit, FiTrash } from "react-icons/fi";
+import { FiUpload, FiSun, FiMoon, FiEdit, FiTrash } from "react-icons/fi";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { UserContext } from "../../context/UserContext"; // Import UserContext
+import { toast } from "react-toastify";
 
 const Profile = () => {
-  const { current_user, fetchCurrentUser } = useContext(UserContext); // Access user details
+  const { current_user, fetchCurrentUser, updateUser, deleteUser } = useContext(UserContext);
   const [darkMode, setDarkMode] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
-  const [search, setSearch] = useState("");
   const [editing, setEditing] = useState(false);
   const [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
-    username: "",
+    email: "",
     password: "",
   });
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // Fetch user details on mount
   useEffect(() => {
     if (!current_user) {
-      fetchCurrentUser(); // Ensure user data is loaded
+      fetchCurrentUser();
     } else {
       setUserData({
         first_name: current_user.first_name || "",
         last_name: current_user.last_name || "",
-        username: current_user.username || "",
+        email: current_user.email || "",
         password: "",
       });
     }
@@ -42,17 +43,46 @@ const Profile = () => {
 
   // Handle Edit
   const handleEdit = () => {
-    setEditing(true);
+    if (editing) {
+      // Validate password confirmation
+      if (userData.password && userData.password !== confirmPassword) {
+        toast.error("Passwords do not match!");
+        return;
+      }
+
+      // Prepare the data to be sent to the backend
+      const updatedData = {
+        first_name: userData.first_name,
+        last_name: userData.last_name,
+        email: userData.email,
+      };
+
+      // Only include the password if it has been changed
+      if (userData.password) {
+        updatedData.password = userData.password;
+      }
+
+      // Call the updateUser function
+      updateUser(current_user.id, updatedData)
+        .then(() => {
+          toast.success("Profile updated successfully! 🎉");
+          setEditing(false); // Exit edit mode
+          setConfirmPassword(""); // Clear the confirm password field
+        })
+        .catch((error) => {
+          toast.error(error.message || "Failed to update profile ❌");
+        });
+    } else {
+      // Enter edit mode
+      setEditing(true);
+    }
   };
 
   // Handle Delete
   const handleDelete = () => {
-    setUserData({
-      first_name: "",
-      last_name: "",
-      username: "",
-      password: "",
-    });
+    if (window.confirm("Are you sure you want to delete your account?")) {
+      deleteUser(current_user.id);
+    }
   };
 
   return (
@@ -94,7 +124,7 @@ const Profile = () => {
               <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Username</th>
+                <th>Email</th>
                 <th>Password</th>
                 <th>Actions</th>
               </tr>
@@ -130,11 +160,11 @@ const Profile = () => {
                     <input
                       type="text"
                       className="form-control"
-                      value={userData.username}
-                      onChange={(e) => setUserData({ ...userData, username: e.target.value })}
+                      value={userData.email}
+                      onChange={(e) => setUserData({ ...userData, email: e.target.value })}
                     />
                   ) : (
-                    userData.username
+                    userData.email
                   )}
                 </td>
                 <td>
@@ -158,6 +188,22 @@ const Profile = () => {
                   </button>
                 </td>
               </tr>
+              {editing && (
+                <tr>
+                  <td colSpan="4">
+                    <div className="mb-3">
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                      />
+                    </div>
+                  </td>
+                </tr>
+              )}
               {!userData.first_name && (
                 <tr>
                   <td colSpan="5" className="text-center text-muted">No personal details found</td>

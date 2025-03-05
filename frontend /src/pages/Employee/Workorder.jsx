@@ -58,23 +58,41 @@ export default function AddWorkOrder() {
         }
     };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+    
+        // Validate customer ID
         if (!customerId) {
             setErrorMessage("Please enter a valid email and verify before submitting.");
             return;
         }
-
+    
+        // Create the new work order object
         const newWorkOrder = {
             description,
             status,
             user_id: customerId,
             technician_id: technicianId,
             guard_id: guardId,
-            number_plate
+            number_plate,
         };
-
-        addWorkOrder(newWorkOrder);
+    
+        try {
+            await addWorkOrder(newWorkOrder);
+    
+            // Reset the form fields after successful submission
+            setDescription("");
+            setStatus("Pending");
+            setCustomerEmail("");
+            setCustomerId(null);
+            setTechnicianId("");
+            setGuardId("");
+            setNumberPlate("");
+            setErrorMessage(""); 
+        } catch (error) {
+            console.error("Error adding work order:", error);
+            setErrorMessage("Failed to add work order. Please try again.");
+        }
     };
 
     return (

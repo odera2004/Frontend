@@ -20,13 +20,20 @@ export const UserProvider = ({ children }) => {
       },
       body: JSON.stringify({ email, password })
     })
-    .then((resp) => resp.json())
+    .then((resp) => {
+      if (!resp.ok) {
+        return resp.json().then(errorData => {
+          throw new Error(errorData.error || "Failed to login ❌");
+        });
+      }
+      return resp.json();
+    })
     .then((response) => {
       toast.dismiss();
       if (response.access_token) {
         sessionStorage.setItem("token", response.access_token);
         setAuthToken(response.access_token);
-
+  
         fetch("http://127.0.0.1:5000/current_user", {
           method: "GET",
           headers: {
@@ -43,7 +50,7 @@ export const UserProvider = ({ children }) => {
             redirectBasedOnRole(role);
           }
         });
-
+  
         toast.success("Successfully Logged in 🎉");
         console.log("Toast triggered");
         
@@ -51,12 +58,11 @@ export const UserProvider = ({ children }) => {
         toast.error(response.error || "Failed to login ❌");
       }
     })
-    .catch(() => {
+    .catch((error) => {
       toast.dismiss();
-      toast.error("Network error. Please try again.");
+      toast.error(error.message || "Network error. Please try again.");
     });
   };
-
   // LOGIN WITH GOOGLE
   const login_with_google = (email) => {
     toast.loading("Logging you in...");
@@ -173,7 +179,15 @@ export const UserProvider = ({ children }) => {
       },
       body: JSON.stringify({ first_name, last_name, email, password })
     })
-    .then((resp) => resp.json())
+    .then((resp) => {
+      if (!resp.ok) {
+        // If the response is not ok, parse the error message
+        return resp.json().then(errorData => {
+          throw new Error(errorData.error || "Email already exists");
+        });
+      }
+      return resp.json();
+    })
     .then((response) => {
       toast.dismiss();
       if (response.msg) {
@@ -183,9 +197,77 @@ export const UserProvider = ({ children }) => {
         toast.error(response.error || "Registration failed ❌");
       }
     })
-    .catch(() => {
+    .catch((error) => {
       toast.dismiss();
-      toast.error("Network error. Please try again.");
+      toast.error(error.message || "Network error. Please try again.");
+    });
+  };
+    // UPDATE USER
+    const updateUser = (user_id, updatedData) => {
+      toast.loading("Updating user...");
+      return fetch(`http://127.0.0.1:5000/users/${user_id}`, {
+        method: "PUT",
+        headers: {
+          'Content-type': 'application/json',
+          "Authorization": `Bearer ${authToken}` 
+        },
+        body: JSON.stringify(updatedData)
+      })
+      .then((resp) => {
+        if (!resp.ok) {
+          return resp.json().then(errorData => {
+            throw new Error(errorData.error || "Failed to update user ❌");
+          });
+        }
+        return resp.json();
+      })
+      .then((response) => {
+        toast.dismiss();
+        if (response.msg) {
+          toast.success("User updated successfully! 🎉");
+          fetchCurrentUser(); // Refresh the current user data
+          return response; // Resolve the promise
+        } else {
+          throw new Error(response.error || "Failed to update user ❌");
+        }
+      })
+      .catch((error) => {
+        toast.dismiss();
+        toast.error(error.message || "Network error. Please try again.");
+        throw error; // Re-throw the error to propagate it
+      });
+    };
+
+  // DELETE USER
+  const deleteUser = (user_id) => {
+    toast.loading("Deleting user...");
+    fetch(`http://127.0.0.1:5000/users/${user_id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-type': 'application/json',
+        "Authorization": `Bearer ${authToken}` 
+      }
+    })
+    .then((resp) => {
+      if (!resp.ok) {
+        return resp.json().then(errorData => {
+          throw new Error(errorData.error || "Failed to delete user ❌");
+        });
+      }
+      return resp.json();
+    })
+    .then((response) => {
+      toast.dismiss();
+      if (response.msg) {
+        toast.success("User deleted successfully! 🎉");
+        logout(); // Log out the user after deletion
+      } else {
+        toast.error(response.error || "Failed to delete user ❌");
+      }
+    })
+    .catch((error) => {
+      toast.dismiss();
+      toast.error(error.message || "Network error. Please try again.");
     });
   };
 
@@ -213,6 +295,8 @@ export const UserProvider = ({ children }) => {
     current_user,
     logout,
     addUser,
+    updateUser,
+    deleteUser,
     fetchCurrentUser
   };
 

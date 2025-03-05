@@ -56,23 +56,31 @@ export const EmployeeProvider = ({ children }) => {
 
     const checkoutVehicle = async (vehiclePlate) => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/checkout", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ number_plate: vehiclePlate }),
-            });
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || "Checkout failed");
-            }
-            return data;
+          const response = await fetch("http://127.0.0.1:5000/checkout", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ number_plate: vehiclePlate }),
+          });
+      
+          const data = await response.json();
+      
+          // Handle 403 response (pending bill)
+          if (response.status === 403) {
+            throw new Error(data.message || "Cannot checkout. Clear pending bill.");
+          }
+      
+          // Handle other errors
+          if (!response.ok) {
+            throw new Error(data.message || "Checkout failed");
+          }
+      
+          return data;
         } catch (err) {
-            throw new Error(err.message);
+          throw new Error(err.message);
         }
-    };
+      };
 
     // Function to delete an employee
     const deleteEmployee = async (employee) => {

@@ -18,9 +18,9 @@ export default function Checkout() {
 
     try {
       const response = await checkoutVehicle(vehiclePlate);
-      setMessage(response.message);
+      setMessage(response.message); // Display success message
     } catch (err) {
-      setError(err.message);
+      setError(err.message); // Display error message
     }
   };
 

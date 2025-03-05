@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const PartsContext = createContext();
 
@@ -15,6 +17,7 @@ export const PartsProvider = ({ children }) => {
             setParts(data);
         } catch (err) {
             setError("Failed to fetch parts");
+            toast.error("Failed to fetch parts");
         } finally {
             setLoading(false);
         }
@@ -28,18 +31,22 @@ export const PartsProvider = ({ children }) => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newPart),
             });
-
+    
             if (response.ok) {
                 const addedPart = await response.json();
-                setParts([...parts, addedPart]); 
+                setParts((prevParts) => [...prevParts, addedPart]); 
+                toast.success("Part added successfully!");
             } else {
                 throw new Error("Failed to add part");
             }
         } catch (err) {
             setError(err.message);
+            toast.error(err.message);
         }
     };
+    
 
+    // Function to delete a part
     const deletePart = async (partId) => {
         try {
             const response = await fetch(`http://127.0.0.1:5000/parts/${partId}`, {
@@ -48,11 +55,13 @@ export const PartsProvider = ({ children }) => {
 
             if (response.ok) {
                 setParts((prevParts) => prevParts.filter((part) => part.id !== partId));
+                toast.success("Part deleted successfully!");
             } else {
                 throw new Error("Failed to delete part");
             }
         } catch (err) {
             setError(err.message);
+            toast.error(err.message);
         }
     };
 
@@ -71,11 +80,13 @@ export const PartsProvider = ({ children }) => {
                         part.id === partId ? { ...part, ...updatedPart } : part
                     )
                 );
+                toast.success("Part updated successfully!");
             } else {
                 throw new Error("Failed to update part");
             }
         } catch (err) {
             setError(err.message);
+            toast.error(err.message);
         }
     };
 

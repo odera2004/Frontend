@@ -25,20 +25,18 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     if (!formData.first_name || !formData.last_name || !formData.email || !formData.password || !formData.confirmPassword) {
       setMessage("All fields are required!");
       return;
     }
-
+  
     if (formData.password !== formData.confirmPassword) {
       setMessage("Passwords do not match!");
       return;
     }
-
+  
     addUser(formData.first_name, formData.last_name, formData.email, formData.password);
-    setMessage("Account created successfully!");
-    setTimeout(() => navigate("/login"), 4000);
   };
 
   const handleGoogleSignUp = (credential) => {

@@ -68,9 +68,7 @@ At <strong>Auto Fix Hub</strong>, we make car care simple, reliable, and hassle-
   >
     Book Now
   </button>
-</div>
-
-
+    </div>
       {/* Why Choose Us */}
       <section className="text-center my-5">
         <h2 className="fw-bold mb-4">Why Choose Us?</h2>
@@ -152,11 +150,9 @@ At <strong>Auto Fix Hub</strong>, we make car care simple, reliable, and hassle-
       </section>
 
       {/* Call to Action */}
-      <section className="text-center my-5">
+      <section className="text-center ">
         <h2 className="fw-bold">Ready to give your car the best care?</h2>
         <p className="lead">Book your service today!</p>
-      
-
       </section>
     </div>
   );

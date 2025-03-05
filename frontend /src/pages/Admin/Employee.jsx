@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEmployees } from "../../context/EmployeeContext";
 import { Modal, Button, Form } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa"; 
+import { toast } from "react-toastify";
 
 export default function Employee() {
     const { employees, loading, error, addEmployee, deleteEmployee } = useEmployees();
@@ -42,24 +43,23 @@ export default function Employee() {
         e.preventDefault();
         try {
             await addEmployee({
-                email: formData.email, 
+                email: formData.email,
                 role: formData.role,
                 skillSet: formData.skillSet,
                 shiftStart: formData.shiftStart,
                 shiftEnd: formData.shiftEnd,
             });
+            
+    
+            toast.success("Employee added successfully!"); // 🎉 Success message
             setShowModal(false);
-            setFormData({
-                email: "",
-                role: "",
-                skillSet: "",
-                shiftStart: "",
-                shiftEnd: "",
-            });
+            setFormData({ email: "", role: "", skillSet: "", shiftStart: "", shiftEnd: "" });
         } catch (error) {
+            toast.error(error.message || "Failed to add employee!"); // ❌ Error message
             console.error("Error adding employee:", error);
         }
     };
+    
 
     const filteredEmployees = employees.filter((employee) =>
         `${employee.first_name} ${employee.last_name} ${employee.email}`
@@ -79,11 +79,16 @@ export default function Employee() {
     };
 
     const handleDelete = async () => {
-        await deleteEmployee(employeeToDelete);
-        setShowDeleteModal(false);
-        setEmployeeToDelete(null);
+        try {
+            await deleteEmployee(employeeToDelete);
+            toast.success("Employee deleted successfully!"); // ✅ Success message
+            setShowDeleteModal(false);
+            setEmployeeToDelete(null);
+        } catch (error) {
+            toast.error(error.message || "Failed to delete employee!"); // ❌ Error message
+        }
     };
-
+    
     return (
         <div className="container-fluid mt-4">
             <h2 className="mb-4 text-center">Employee Management</h2>
