@@ -14,10 +14,10 @@ export default function WorkOrders() {
         {/* Active Work Orders Section */}
         <div className="col-md-6">
           <div className="card shadow-sm mb-4" style={{ minHeight: "400px" }}>
-            <div className="card-header bg-primary text-white border-0">
+            <div className="card-header bg-warning text-dark border-0">
               <h4 className="mb-0">Active Work Orders</h4>
             </div>
-            <div className="card-body">
+            <div className="card-body" style={{ maxHeight: "400px", overflowY: "auto" }}>
               <div className="table-responsive">
                 <table className="table table-hover align-middle">
                   <thead>
@@ -38,17 +38,16 @@ export default function WorkOrders() {
                           <td>{order.description}</td>
                           <td>{order.technician}</td>
                           <td>
-                          <span
-                          className={`badge ${order.status === "in progress"
-                            ? "bg-warning text-dark"  
-                            : order.status === "Pending"
-                              ? "bg-info text-dark" 
-                              : "bg-secondary"
-                          }`}
-                        >
-                          {order.status}
-                        </span>
-
+                            <span
+                              className={`badge ${order.status === "in progress"
+                                ? "bg-warning text-dark"  
+                                : order.status === "Pending"
+                                  ? "bg-info text-dark" 
+                                  : "bg-secondary"
+                              }`}
+                            >
+                              {order.status}
+                            </span>
                           </td>
                         </tr>
                       ))
@@ -72,7 +71,7 @@ export default function WorkOrders() {
             <div className="card-header bg-success text-white border-0">
               <h4 className="mb-0">Previous Work Orders</h4>
             </div>
-            <div className="card-body">
+            <div className="card-body" style={{ maxHeight: "400px", overflowY: "auto" }}>
               <div className="table-responsive">
                 <table className="table table-hover align-middle">
                   <thead>

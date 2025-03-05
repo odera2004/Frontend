@@ -38,10 +38,10 @@ function Home() {
           <p
   className="lead"
   style={{
-    fontSize: "1.5rem",  // Bigger text
-    lineHeight: "1.8",  // Improved readability
+    fontSize: "1.5rem", 
+    lineHeight: "1.8",  
     fontWeight: "bold",
-    color: "#222",  // Darker text
+    color: "#222", 
   }}
 >
 Welcome to <strong>Auto Fix Hub</strong>, where your car gets the care it deserves! We know your vehicle is more than just transportation—it’s your daily companion. That’s why we offer top-quality services, from quick fixes and full-service check-ups to custom upgrades, ensuring your car runs smoothly and efficiently.
@@ -59,8 +59,8 @@ At <strong>Auto Fix Hub</strong>, we make car care simple, reliable, and hassle-
     className="btn btn-dark btn-lg" 
     style={{
       transition: "background 0.3s ease",
-      marginTop: "50px",  // 2 inches spacing
-      padding: "12px 24px", // Good button size
+      marginTop: "50px",  
+      padding: "12px 24px", 
     }}
     onMouseEnter={(e) => e.target.style.background = "#333"}
     onMouseLeave={(e) => e.target.style.background = "#000"}

@@ -20,7 +20,7 @@ function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/instagram" className="text-white fs-4">
+                <Link to="https://www.instagram.com/" className="text-white fs-4">
                   <FaInstagram />
                 </Link>
               </li>
