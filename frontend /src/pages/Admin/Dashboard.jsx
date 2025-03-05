@@ -4,7 +4,7 @@ import { PartsContext } from '../../context/PartsContext';
 import { toast } from 'react-toastify';
 
 export default function Dashboard() {
-    const { workOrders, billings, fetchWorkOrders} = useContext(AdminContext); 
+    const { workOrders, billings,fetchWorkOrders } = useContext(AdminContext); 
     const { parts, loading: partsLoading, error: partsError } = useContext(PartsContext);
     const [pendingPayments, setPendingPayments] = useState(0);
     const [lowStockItemsCount, setLowStockItemsCount] = useState(0);

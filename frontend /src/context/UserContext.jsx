@@ -16,52 +16,52 @@ export const UserProvider = ({ children }) => {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
-        "Authorization": `Bearer ${authToken}` 
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     })
-    .then((resp) => {
-      if (!resp.ok) {
-        return resp.json().then(errorData => {
-          throw new Error(errorData.error || "Failed to login ❌");
-        });
-      }
-      return resp.json();
-    })
-    .then((response) => {
-      toast.dismiss();
-      if (response.access_token) {
-        sessionStorage.setItem("token", response.access_token);
-        setAuthToken(response.access_token);
+      .then((resp) => {
+        if (!resp.ok) {
+          // Parse the error response and throw an error with the message
+          return resp.json().then((errorData) => {
+            throw new Error(errorData.error || "Failed to login ❌");
+          });
+        }
+        return resp.json();
+      })
+      .then((response) => {
+        toast.dismiss();
+        if (response.access_token) {
+          sessionStorage.setItem("token", response.access_token);
+          setAuthToken(response.access_token);
   
-        fetch("http://127.0.0.1:5000/current_user", {
-          method: "GET",
-          headers: {
-            'Content-type': 'application/json',
-            "Authorization": `Bearer ${response.access_token}`
-          }
-        })
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.email) {
-            setCurrentUser(response);
-            const role = response.role ? response.role.toLowerCase() : "user";
-            sessionStorage.setItem("userRole", role);
-            redirectBasedOnRole(role);
-          }
-        });
+          fetch("http://127.0.0.1:5000/current_user", {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json',
+              Authorization: `Bearer ${response.access_token}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              if (response.email) {
+                setCurrentUser(response);
+                const role = response.role ? response.role.toLowerCase() : "user";
+                sessionStorage.setItem("userRole", role);
+                redirectBasedOnRole(role);
+              }
+            });
   
-        toast.success("Successfully Logged in 🎉");
-        console.log("Toast triggered");
-        
-      } else {
-        toast.error(response.error || "Failed to login ❌");
-      }
-    })
-    .catch((error) => {
-      toast.dismiss();
-      toast.error(error.message || "Network error. Please try again.");
-    });
+          toast.success("Successfully Logged in 🎉");
+        } else {
+          // Handle case where access_token is missing
+          toast.error(response.error || "Failed to login ❌");
+        }
+      })
+      .catch((error) => {
+        toast.dismiss();
+        // Display the error message in the toast
+        toast.error(error.message || "Network error. Please try again.");
+      });
   };
   // LOGIN WITH GOOGLE
   const login_with_google = (email) => {
