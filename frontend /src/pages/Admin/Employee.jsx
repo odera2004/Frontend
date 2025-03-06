@@ -51,11 +51,11 @@ export default function Employee() {
             });
             
     
-            toast.success("Employee added successfully!"); // 🎉 Success message
+            toast.success("Employee added successfully!"); 
             setShowModal(false);
             setFormData({ email: "", role: "", skillSet: "", shiftStart: "", shiftEnd: "" });
         } catch (error) {
-            toast.error(error.message || "Failed to add employee!"); // ❌ Error message
+            toast.error(error.message || "Failed to add employee!"); 
             console.error("Error adding employee:", error);
         }
     };
@@ -81,11 +81,11 @@ export default function Employee() {
     const handleDelete = async () => {
         try {
             await deleteEmployee(employeeToDelete);
-            toast.success("Employee deleted successfully!"); // ✅ Success message
+            toast.success("Employee deleted successfully!"); 
             setShowDeleteModal(false);
             setEmployeeToDelete(null);
         } catch (error) {
-            toast.error(error.message || "Failed to delete employee!"); // ❌ Error message
+            toast.error(error.message || "Failed to delete employee!"); 
         }
     };
     
@@ -104,7 +104,7 @@ export default function Employee() {
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                 </div>
-                <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+                <button className="btn btn-dark btn" onClick={() => setShowModal(true)}>
                     Add Employee
                 </button>
             </div>

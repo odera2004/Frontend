@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css"; 
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -31,7 +31,7 @@ const ResetPassword = () => {
     }
 
     setIsLoading(true);
-    setMessage(""); // Clear previous messages
+    setMessage(""); 
 
     try {
       const response = await fetch(

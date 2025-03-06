@@ -111,7 +111,7 @@ export default function AddWorkOrder() {
                             onChange={(e) => setCustomerEmail(e.target.value)}
                             placeholder="Enter customer's email"
                         />
-                        <button type="button" className="btn btn-primary" onClick={() => validateCustomerEmail(customerEmail)}> 
+                        <button type="button" className="btn btn-dark btn" onClick={() => validateCustomerEmail(customerEmail)}> 
                             Verify Email
                         </button>
                     </div>

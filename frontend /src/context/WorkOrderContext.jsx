@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { UserContext } from './UserContext';  // Import UserContext to access the current user
+import { UserContext } from './UserContext';  
 
 export const WorkOrderContext = createContext();
 
@@ -7,7 +7,7 @@ export const WorkOrderProvider = ({ children }) => {
   const [activeWorkOrders, setActiveWorkOrders] = useState([]);
   const [previousWorkOrders, setPreviousWorkOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { current_user } = useContext(UserContext);  // Get the current user
+  const { current_user } = useContext(UserContext);  
 
   // Function to create a new work order
   const createWorkOrder = async (workOrderData) => {
@@ -25,7 +25,7 @@ export const WorkOrderProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      return data; // Return the created work order data
+      return data; 
     } catch (error) {
       console.error('Error creating work order:', error);
       return { error: error.message }; 
@@ -75,7 +75,7 @@ export const WorkOrderProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (current_user) {  // Only fetch work orders if the current user is available
+    if (current_user) {  
       const fetchOrders = async () => {
         await Promise.all([fetchActiveWorkOrders(), fetchPreviousWorkOrders()]);
         setLoading(false);
@@ -83,14 +83,14 @@ export const WorkOrderProvider = ({ children }) => {
 
       fetchOrders();
     }
-  }, [current_user]);  // Re-fetch when the current user changes
+  }, [current_user]);  
 
   return (
     <WorkOrderContext.Provider value={{
       activeWorkOrders,
       previousWorkOrders,
       loading,
-      createWorkOrder, // Include createWorkOrder in the context value
+      createWorkOrder, 
     }}>
       {children}
     </WorkOrderContext.Provider>

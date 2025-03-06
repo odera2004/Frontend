@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage(""); // Clear previous messages
+    setMessage(""); 
 
     try {
       const response = await fetch("https://garage-7f3u.onrender.com/forgot-password", {

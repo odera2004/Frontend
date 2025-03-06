@@ -21,7 +21,6 @@ export const UserProvider = ({ children }) => {
     })
       .then((resp) => {
         if (!resp.ok) {
-          // Parse the error response and throw an error with the message
           return resp.json().then((errorData) => {
             throw new Error(errorData.error || "Failed to login ❌");
           });
@@ -53,13 +52,11 @@ export const UserProvider = ({ children }) => {
   
           toast.success("Successfully Logged in 🎉");
         } else {
-          // Handle case where access_token is missing
           toast.error(response.error || "Failed to login ❌");
         }
       })
       .catch((error) => {
         toast.dismiss();
-        // Display the error message in the toast
         toast.error(error.message || "Network error. Please try again.");
       });
   };
@@ -181,7 +178,6 @@ export const UserProvider = ({ children }) => {
     })
     .then((resp) => {
       if (!resp.ok) {
-        // If the response is not ok, parse the error message
         return resp.json().then(errorData => {
           throw new Error(errorData.error || "Email already exists");
         });
@@ -225,8 +221,8 @@ export const UserProvider = ({ children }) => {
         toast.dismiss();
         if (response.msg) {
           toast.success("User updated successfully! 🎉");
-          fetchCurrentUser(); // Refresh the current user data
-          return response; // Resolve the promise
+          fetchCurrentUser(); 
+          return response; 
         } else {
           throw new Error(response.error || "Failed to update user ❌");
         }
@@ -234,7 +230,7 @@ export const UserProvider = ({ children }) => {
       .catch((error) => {
         toast.dismiss();
         toast.error(error.message || "Network error. Please try again.");
-        throw error; // Re-throw the error to propagate it
+        throw error; 
       });
     };
 
@@ -260,7 +256,7 @@ export const UserProvider = ({ children }) => {
       toast.dismiss();
       if (response.msg) {
         toast.success("User deleted successfully! 🎉");
-        logout(); // Log out the user after deletion
+        logout(); 
       } else {
         toast.error(response.error || "Failed to delete user ❌");
       }

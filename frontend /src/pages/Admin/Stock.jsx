@@ -26,9 +26,9 @@ export default function Stock() {
         e.preventDefault();
         if (!formData.name || !formData.quantity || !formData.price) return;
 
-        await addPart(formData); // Add part via context
+        await addPart(formData); 
         setShowModal(false);
-        setFormData({ name: "", quantity: "", price: "" }); // Reset form
+        setFormData({ name: "", quantity: "", price: "" }); 
     };
 
     // Handle search filtering

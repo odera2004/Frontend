@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { FiUpload, FiSun, FiMoon, FiEdit, FiTrash } from "react-icons/fi";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { UserContext } from "../../context/UserContext"; // Import UserContext
+import { UserContext } from "../../context/UserContext"; 
 import { toast } from "react-toastify";
 
 const Profile = () => {

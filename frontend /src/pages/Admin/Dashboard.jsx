@@ -42,7 +42,7 @@ export default function Dashboard() {
             });
 
             if (!response.ok) throw new Error('Failed to delete work order');
-            fetchWorkOrders(); // Refresh work orders after deletion
+            fetchWorkOrders(); 
             toast.success('Work order deleted successfully!');
         } catch (error) {
             console.error('Error deleting work order:', error);

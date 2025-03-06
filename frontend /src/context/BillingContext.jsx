@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { UserContext } from './UserContext';  // Import UserContext to access the current user
+import { UserContext } from './UserContext';  
 
 export const BillingContext = createContext();
 
@@ -7,7 +7,7 @@ export const BillingProvider = ({ children }) => {
   const [pendingBillings, setPendingBillings] = useState([]);
   const [previousBillings, setPreviousBillings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { current_user } = useContext(UserContext);  // Get the current user
+  const { current_user } = useContext(UserContext);  
 
   // Function to fetch billings for the current user
   const fetchBillings = async () => {
@@ -42,17 +42,17 @@ export const BillingProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (current_user) {  // Only fetch billings if the current user is available
+    if (current_user) {  
       fetchBillings();
     }
-  }, [current_user]);  // Re-fetch when the current user changes
+  }, [current_user]);  
 
   return (
     <BillingContext.Provider value={{
       pendingBillings,
       previousBillings,
       loading,
-      fetchBillings,  // Expose fetchBillings for manual refreshes
+      fetchBillings,  
     }}>
       {children}
     </BillingContext.Provider>

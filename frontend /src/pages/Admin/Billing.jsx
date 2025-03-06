@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { toast } from "react-toastify";
-import { FaEdit, FaTrash } from 'react-icons/fa';  // Import icons
+import { FaEdit, FaTrash } from 'react-icons/fa';  
 
 export default function Billing() {
     const { billings, fetchBillings, updateBilling, deleteBilling } = useContext(AdminContext);

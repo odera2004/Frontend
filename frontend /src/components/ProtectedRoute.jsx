@@ -1,4 +1,3 @@
-// ProtectedRoute.jsx
 import { Navigate, Outlet } from "react-router-dom";
 
 export const ProtectedRoute = ({ allowedRoles = [] }) => {
@@ -8,7 +7,6 @@ export const ProtectedRoute = ({ allowedRoles = [] }) => {
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
-  
   // Check if user has permission to access this route
   if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
     // Redirect based on role

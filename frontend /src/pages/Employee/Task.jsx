@@ -62,7 +62,7 @@ export default function Task() {
             {/* Tabs for switching between views */}
             <ul className="nav nav-tabs mb-4">
                 <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#allPendingAndInProgress" data-bs-toggle="tab">
+                    <a className="nav-link active" aria-current="page" href="#allPendingAndInProgress" data-bs-toggle="tab" >
                         All Pending and In Progress
                     </a>
                 </li>
@@ -140,7 +140,7 @@ export default function Task() {
                                                 <td>{workOrder.status}</td>
                                                 <td>
                                                     <button
-                                                        className="btn btn-sm btn-primary"
+                                                        className="btn btn-dark btn"
                                                         onClick={() => handleEditClick(workOrder)}
                                                     >
                                                         Edit

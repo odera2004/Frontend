@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { BillingContext } from '../../context/BillingContext';
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 
-
 function Billings() {
   const { pendingBillings, previousBillings, loading } = useContext(BillingContext);
 
