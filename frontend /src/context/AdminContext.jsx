@@ -14,7 +14,7 @@ export const AdminProvider = ({ children }) => {
     const fetchWorkOrders = useCallback(async () => {
         if (!current_user) return;
         try {
-            const response = await fetch('http://127.0.0.1:5000/work_orders', {
+            const response = await fetch('https://garage-7f3u.onrender.com/work_orders', {
                 headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${authToken}` }
             });
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -30,7 +30,7 @@ export const AdminProvider = ({ children }) => {
     const fetchBillings = useCallback(async () => {
         if (!current_user) return;
         try {
-            const response = await fetch('http://127.0.0.1:5000/billings', {
+            const response = await fetch('https://garage-7f3u.onrender.com/billings', {
                 headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${authToken}` }
             });
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -45,7 +45,7 @@ export const AdminProvider = ({ children }) => {
     // Fetch technician ID for the current user
     const fetchTechnicianId = async (userId) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/technician?user_id=${userId}`, {
+            const response = await fetch(`https://garage-7f3u.onrender.com/technician?user_id=${userId}`, {
                 headers: {
                     'Content-type': 'application/json',
                     Authorization: `Bearer ${authToken}`
@@ -63,7 +63,7 @@ export const AdminProvider = ({ children }) => {
     // Add a new work order
     const addWorkOrder = async (newWorkOrder) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/work_order', {
+            const response = await fetch('https://garage-7f3u.onrender.com/work_order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${authToken}` },
                 body: JSON.stringify(newWorkOrder)
@@ -81,7 +81,7 @@ export const AdminProvider = ({ children }) => {
     // Update billing data
     const updateBilling = async (billingId, updatedBilling) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/billings/${billingId}`, {
+            const response = await fetch(`https://garage-7f3u.onrender.com/billings/${billingId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${authToken}` },
                 body: JSON.stringify(updatedBilling)
@@ -99,7 +99,7 @@ export const AdminProvider = ({ children }) => {
     // Delete a billing
     const deleteBilling = async (billingId) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/billings/${billingId}`, {
+            const response = await fetch(`https://garage-7f3u.onrender.com/billings/${billingId}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${authToken}` }
             });

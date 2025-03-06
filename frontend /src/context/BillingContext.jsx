@@ -15,7 +15,7 @@ export const BillingProvider = ({ children }) => {
 
     try {
       // Fetch all billings for the current user
-      const response = await fetch(`http://127.0.0.1:5000/billings?user_id=${current_user.id}`, {
+      const response = await fetch(`https://garage-7f3u.onrender.com/billings?user_id=${current_user.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

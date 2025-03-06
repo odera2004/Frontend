@@ -36,7 +36,7 @@ export default function Task() {
         if (!selectedWorkOrder) return;
 
         try {
-            const response = await fetch(`http://127.0.0.1:5000/work_orders/${selectedWorkOrder.id}`, {
+            const response = await fetch(`https://garage-7f3u.onrender.com/work_orders/${selectedWorkOrder.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

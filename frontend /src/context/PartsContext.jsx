@@ -10,7 +10,7 @@ export const PartsProvider = ({ children }) => {
     const fetchParts = async () => {
         setLoading(true);
         try {
-            const response = await fetch("http://127.0.0.1:5000/parts");
+            const response = await fetch("https://garage-7f3u.onrender.com/parts");
             const data = await response.json();
             setParts(data);
         } catch (err) {
@@ -23,7 +23,7 @@ export const PartsProvider = ({ children }) => {
     // Function to add a new part
     const addPart = async (newPart) => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/parts", {
+            const response = await fetch("https://garage-7f3u.onrender.com/parts", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newPart),
@@ -42,7 +42,7 @@ export const PartsProvider = ({ children }) => {
 
     const deletePart = async (partId) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/parts/${partId}`, {
+            const response = await fetch(`https://garage-7f3u.onrender.com/parts/${partId}`, {
                 method: "DELETE",
             });
 
@@ -59,7 +59,7 @@ export const PartsProvider = ({ children }) => {
     // Function to update a part
     const updatePart = async (partId, updatedPart) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/parts/${partId}`, {
+            const response = await fetch(`https://garage-7f3u.onrender.com/parts/${partId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatedPart),

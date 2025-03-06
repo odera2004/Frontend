@@ -33,7 +33,7 @@ export default function Dashboard() {
     // Handle delete work order
     const handleDeleteWorkOrder = async (workOrderId) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/work_order/${workOrderId}`, {
+            const response = await fetch(`https://garage-7f3u.onrender.com/work_order/${workOrderId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

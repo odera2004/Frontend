@@ -40,7 +40,7 @@ const Booking = () => {
   useEffect(() => {
     const fetchTechnicians = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/technicians");
+        const response = await fetch("https://garage-7f3u.onrender.com/technicians");
         if (!response.ok) {
           throw new Error("Failed to fetch technicians");
         }
@@ -61,7 +61,7 @@ const Booking = () => {
   // Function to validate email and fetch user ID
   const validateEmailAndFetchUserId = async (email) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/users/email/${encodeURIComponent(email)}`);
+      const response = await fetch(`https://garage-7f3u.onrender.com/users/email/${encodeURIComponent(email)}`);
       if (!response.ok) {
         throw new Error("User not found");
       }

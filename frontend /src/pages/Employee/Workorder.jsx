@@ -20,8 +20,8 @@ export default function AddWorkOrder() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resTechnicians = await fetch("http://127.0.0.1:5000/technicians");
-                const resGuards = await fetch("http://127.0.0.1:5000/guards");
+                const resTechnicians = await fetch("https://garage-7f3u.onrender.com/technicians");
+                const resGuards = await fetch("https://garage-7f3u.onrender.com/guards");
 
                 setTechnicians(await resTechnicians.json());
                 setGuards(await resGuards.json());
@@ -43,7 +43,7 @@ export default function AddWorkOrder() {
         }
     
         try {
-            const response = await fetch(`http://127.0.0.1:5000/users/email/${encodeURIComponent(email)}`);
+            const response = await fetch(`https://garage-7f3u.onrender.com/users/email/${encodeURIComponent(email)}`);
     
             if (!response.ok) {
                 setErrorMessage("User does not exist. Please create an account first.");

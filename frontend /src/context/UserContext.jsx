@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
   // LOGIN
   const login = (email, password) => {
     toast.loading("Logging you in...");
-    fetch("http://127.0.0.1:5000/login", {
+    fetch("https://garage-7f3u.onrender.com/login", {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
@@ -34,7 +34,7 @@ export const UserProvider = ({ children }) => {
           sessionStorage.setItem("token", response.access_token);
           setAuthToken(response.access_token);
   
-          fetch("http://127.0.0.1:5000/current_user", {
+          fetch("https://garage-7f3u.onrender.com/current_user", {
             method: "GET",
             headers: {
               'Content-type': 'application/json',
@@ -66,7 +66,7 @@ export const UserProvider = ({ children }) => {
   // LOGIN WITH GOOGLE
   const login_with_google = (email) => {
     toast.loading("Logging you in...");
-    fetch("http://127.0.0.1:5000/login_with_google", {
+    fetch("https://garage-7f3u.onrender.com/login_with_google", {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
@@ -80,7 +80,7 @@ export const UserProvider = ({ children }) => {
         sessionStorage.setItem("token", response.access_token);
         setAuthToken(response.access_token);
 
-        fetch("http://127.0.0.1:5000/current_user", {
+        fetch("https://garage-7f3u.onrender.com/current_user", {
           method: "GET",
           headers: {
             'Content-type': 'application/json',
@@ -111,7 +111,7 @@ export const UserProvider = ({ children }) => {
   // LOGOUT
   const logout = () => {
     toast.loading("Logging out...");
-    fetch("http://127.0.0.1:5000/logout", {
+    fetch("https://garage-7f3u.onrender.com/logout", {
       method: "DELETE",
       headers: {
         'Content-type': 'application/json',
@@ -146,7 +146,7 @@ export const UserProvider = ({ children }) => {
   }, [authToken]);
 
   const fetchCurrentUser = () => {
-    fetch("http://127.0.0.1:5000/current_user", {
+    fetch("https://garage-7f3u.onrender.com/current_user", {
       method: "GET",
       headers: {
         'Content-type': 'application/json',
@@ -171,7 +171,7 @@ export const UserProvider = ({ children }) => {
   const addUser = (first_name, last_name, email, password) => {
     console.log("Registering user with:", { first_name, last_name, email });
     toast.loading("Registering...");
-    fetch("http://127.0.0.1:5000/user", {
+    fetch("https://garage-7f3u.onrender.com/user", {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
@@ -205,7 +205,7 @@ export const UserProvider = ({ children }) => {
     // UPDATE USER
     const updateUser = (user_id, updatedData) => {
       toast.loading("Updating user...");
-      return fetch(`http://127.0.0.1:5000/users/${user_id}`, {
+      return fetch(`https://garage-7f3u.onrender.com/users/${user_id}`, {
         method: "PUT",
         headers: {
           'Content-type': 'application/json',
@@ -241,7 +241,7 @@ export const UserProvider = ({ children }) => {
   // DELETE USER
   const deleteUser = (user_id) => {
     toast.loading("Deleting user...");
-    fetch(`http://127.0.0.1:5000/users/${user_id}`, {
+    fetch(`https://garage-7f3u.onrender.com/users/${user_id}`, {
       method: "DELETE",
       headers: {
         'Content-type': 'application/json',

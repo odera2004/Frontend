@@ -11,8 +11,8 @@ export const EmployeeProvider = ({ children }) => {
         const fetchEmployees = async () => {
             try {
                 const [guardsRes, techniciansRes] = await Promise.all([
-                    fetch("http://127.0.0.1:5000/guards").then((res) => res.json()),
-                    fetch("http://127.0.0.1:5000/technicians").then((res) => res.json()),
+                    fetch("https://garage-7f3u.onrender.com/guards").then((res) => res.json()),
+                    fetch("https://garage-7f3u.onrender.com/technicians").then((res) => res.json()),
                 ]);
                 const mergedEmployees = [
                     ...guardsRes.map((guard) => ({ ...guard, role: "guard" })),
@@ -30,7 +30,7 @@ export const EmployeeProvider = ({ children }) => {
 
     const addEmployee = async (formData) => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/promote_user", {
+            const response = await fetch("https://garage-7f3u.onrender.com/promote_user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export const EmployeeProvider = ({ children }) => {
 
     const checkoutVehicle = async (vehiclePlate) => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/checkout", {
+            const response = await fetch("https://garage-7f3u.onrender.com/checkout", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -79,9 +79,9 @@ export const EmployeeProvider = ({ children }) => {
         try {
             let endpoint = "";
             if (employee.role === "guard") {
-                endpoint = `http://127.0.0.1:5000/guards/${employee.id}`;
+                endpoint = `https://garage-7f3u.onrender.com/guards/${employee.id}`;
             } else if (employee.role === "technician") {
-                endpoint = `http://127.0.0.1:5000/technicians/${employee.id}`;
+                endpoint = `https://garage-7f3u.onrender.com/technicians/${employee.id}`;
             } else {
                 throw new Error("Cannot delete this employee");
             }

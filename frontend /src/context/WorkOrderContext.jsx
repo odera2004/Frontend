@@ -12,7 +12,7 @@ export const WorkOrderProvider = ({ children }) => {
   // Function to create a new work order
   const createWorkOrder = async (workOrderData) => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/work_order', {
+      const response = await fetch('https://garage-7f3u.onrender.com/work_order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const WorkOrderProvider = ({ children }) => {
   // Function to fetch active work orders for the current user
   const fetchActiveWorkOrders = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/work_orders?status=active&user_id=${current_user.id}`, {
+      const response = await fetch(`https://garage-7f3u.onrender.com/work_orders?status=active&user_id=${current_user.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export const WorkOrderProvider = ({ children }) => {
   // Function to fetch previous work orders for the current user
   const fetchPreviousWorkOrders = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/work_orders?status=previous&user_id=${current_user.id}`, {
+      const response = await fetch(`https://garage-7f3u.onrender.com/work_orders?status=previous&user_id=${current_user.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

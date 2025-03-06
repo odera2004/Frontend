@@ -11,7 +11,7 @@ export const PaymentProvider = ({ children }) => {
     setIsLoading(true);
     try {
         // Add the billing
-        const billingResponse = await fetch("http://127.0.0.1:5000/billing", {
+        const billingResponse = await fetch("https://garage-7f3u.onrender.com/billing", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export const PaymentProvider = ({ children }) => {
         // Update parts inventory only if parts are used
         if (partsUsed.length > 0) {
             for (const part of partsUsed) {
-                const partResponse = await fetch("http://127.0.0.1:5000/workorder_parts", {
+                const partResponse = await fetch("https://garage-7f3u.onrender.com/workorder_parts", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
