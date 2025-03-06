@@ -1,124 +1,77 @@
-### Car Washing Service App
+### Car Service App
 
 ### Date: 03/03/2025 By: Habsa Abdirizack Mohamed ,Eugine Odera,Melissa Kiptoo
 
 ### Description
 
-The Car Washing Service App is a full-stack web application designed to simplify the process of booking car wash services. Users can schedule a car wash, view service packages, track service history, and make payments online. The app also includes an admin dashboard for managing bookings, employees, and payments, while employees can update service statuses and manage work orders efficiently.
+The Car Service App is a full-stack web application designed to automate and simplify the process of booking car maintenance and repair services. Unlike traditional paper-based systems, this app allows users to schedule services, view service packages, track service history, and make payments online. It also includes an admin dashboard for managing bookings, employees, and payments, while employees can update service statuses and manage work orders efficiently.
 
 #### Problem Statement
-
 Many car owners face challenges when trying to access reliable and efficient car washing services:
-
-Inconvenient Booking Process: Customers often struggle to find and schedule car wash services at their preferred time.
-
-Lack of Service Transparency: No clear tracking of ongoing car washes, pricing, or service packages.
-
-Manual Management for Admins & Employees: Managing service bookings, payments, and employee tasks manually can be inefficient.
-
-Limited Payment Options: Customers may face difficulties making secure and quick payments.
+* **Inconvenient Booking Process:** Customers often struggle to find and schedule car wash services at their preferred time.s.
+* **Lack of Service Transparency:** No clear tracking of ongoing car washes, pricing, or service packages.
+* **Manual Management for Admins & Employees:** Managing service bookings, payments, and employee tasks manually can be inefficient.
 
 #### Proposed Solution
 
 To address these challenges, this app provides:
-
-Online Booking System: Users can book car wash services at their convenience.
-
-Service Tracking: Customers can track the status of their car wash in real-time.
-
-Multiple Payment Options: Secure online payments through various methods.
-
-Admin Dashboard: Manage bookings, payments, and employee assignments.
-
-Employee Work Orders: Employees can update service statuses and manage assigned tasks efficiently.
-
-User Authentication: Secure login for customers, admins, and employees.
-
-Responsive Design: Works smoothly on both desktop and mobile devices.
+* **Online Booking System:** Users can book car wash services at their convenience..
+* **Service Tracking** Customers can track the status of their car wash in real-time.
+* **Admin Dashboard:** Manage bookings, payments, and employee assignments.
+* **Employee Work Orders:** Employees can update service statuses and manage assigned tasks efficiently.
+* **User Authenticationn:** Secure login for customers, admins, and employees.
+* **Responsive Design:** Works smoothly on both desktop and mobile devices.
 
 ### Features
 
 ## User Features
 
-Book a Car Wash: Select a service package, choose a time slot, and confirm the booking.
-
-View Booking History: Check past and upcoming car wash appointments.
-
-Make Payments: Pay for services through integrated payment options.
-
-Profile Management: Update personal details and view transaction history.
+* **UBook a Car Wash:** Select a service package, choose a time slot, and confirm the booking.
+* **View Booking History:** Check past and upcoming car wash appointments.
+* **Make Payments:** Pay for services through integrated payment options.
+* **Profile Management:** Update personal details and view transaction history.
 
 ## Admin Features
+* **Manage Bookings:** View, approve, or decline customer bookings.
+* **Manage Employees:** Assign tasks to employees and track their performance.
+* **Track Payments:** Monitor all completed and pending payments.
+* **Service Reports:** Generate reports on completed services and revenue.
 
-Manage Bookings: View, approve, or decline customer bookings.
-
-Manage Employees: Assign tasks to employees and track their performance.
-
-Track Payments: Monitor all completed and pending payments.
-
-Service Reports: Generate reports on completed services and revenue.
 
 ## Employee Features
-
-View Assigned Tasks: See scheduled car washes assigned to them.
-
-Update Work Status: Mark jobs as 'In Progress' or 'Completed'.
-
-Check Work History: Review past work orders and performance metrics.
+* **View Assigned Tasks:**  See scheduled car washes assigned to them.
+* **Update Work Status:** Mark jobs as 'In Progress' or 'Completed'.
+* **Check Work History:** Review past work orders and performance metrics.
+* **Security Checkout:** Easily checkout vehicles after payment confirmation
 
 ### Future Plans
+* **Loyalty Program:**  Reward customers with discounts based on frequent bookings.
+* **AI-powered Recommendations:** Suggest suitable service packages based on vehicle type.
+* **Live Chat Support:**  Enable instant customer support via live chat.
+* **Referral System::** Users can refer friends and earn discounts.
 
-Loyalty Program: Reward customers with discounts based on frequent bookings.
+## Setup/Installation Instructions
 
-AI-powered Recommendations: Suggest suitable service packages based on vehicle type.
-
-Live Chat Support: Enable instant customer support via live chat.
-
-Referral System: Users can refer friends and earn discounts.
-
-Offline Booking Support: Allow customers to book without internet and sync when online.
-
-### Setup/Installation Instructions
-
-1. Clone the Repository
-
-git clone https://github.com/odera2004/Frontend
-
-2. Install Dependencies
-
-cd frontend
-npm install
-
-cd ../backend
-pip install -r requirements.txt
-
-3. Start the Application
-
-# Start the backend
-cd backend
-flask run
-
-# Start the frontend
-cd frontend
-npm run dev
-
+### 1. Clone the Repository  
+Run the following command in your terminal:  
+ - git clone https://github.com/odera2004/Frontend
+ - cd frontend
+ - npm install (To download dependancies)
+ - npm run dev (To run in your localhost)
 
 ## Documentation
 
-View the Project Documents  https://www.canva.com/design/DAGgwYxvgTU/SSPBQAZVkBEdnQJIxmCX_w/edit?utm_content=DAGgwYxvgTU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
-
+View the Project Documents  https://www.canva.com/design/DAGgwYxvgTU/SSPBQAZVkBEdnQJIxmCX_w/editutm_content=DAGgwYxvgTU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 ## GitHub Repository
 
-View the Source Code on GitHub
+View the Source Code on GitHub - https://github.com/odera2004/Frontend
 
-Frontend (Vercel)
+## App access
 
-View the Frontend on Vercel
+The app(frontend)  has been deployed using CloudFlare and can be accesses through https://garage-automation.pages.dev/login
 
-Backend (Render)
-
-### View the Backend on Render
+The backend has also been deployed using Render to acces use - https://garage-7f3u.onrender.com
 
 ## Known Bugs
 
@@ -128,31 +81,31 @@ The app currently functions as expected. If you encounter any issues, please rep
 
 # Backend:
 
-Flask
+1.Flask
 
-Flask-RESTful
+2.Flask-RESTful
 
-Flask-JWT-Extended
+3.Flask-JWT-Extended
 
-SQLAlchemy
+4.SQLAlchemy
 
-Alembic (for database migrations)
+5.Alembic (for database migrations)
 
 # Frontend:
 
-React.js
+1.React.js
 
-React Router
+2.React Router
 
-Axios
+3.Vite
 
-Vite
+4.React-icons
 
 # Other Tools:
 
-SQLite (Database)
+1.SQLite (Database)
 
-Bootstrap for UI styling
+2.Bootstrap for UI styling
 
 ## Support & Contact Details
 
