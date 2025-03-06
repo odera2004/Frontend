@@ -82,7 +82,7 @@ Offline Booking Support: Allow customers to book without internet and sync when 
 
 1. Clone the Repository
 
-git clone https://github.com/hafsa-0-abdy/car-wash-service.git
+git clone https://github.com/odera2004/Frontend
 
 2. Install Dependencies
 
@@ -105,7 +105,7 @@ npm run dev
 
 ## Documentation
 
-View the Project Documents
+View the Project Documents  https://www.canva.com/design/DAGgwYxvgTU/SSPBQAZVkBEdnQJIxmCX_w/edit?utm_content=DAGgwYxvgTU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 
 ## GitHub Repository
