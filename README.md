@@ -61,7 +61,7 @@ Run the following command in your terminal:
 
 ## Documentation
 
-View the Project Documents  https://www.canva.com/design/DAGgwYxvgTU/SSPBQAZVkBEdnQJIxmCX_w/editutm_content=DAGgwYxvgTU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+View the Project Documents  https://www.canva.com/design/DAGgwYxvgTU/SSPBQAZVkBEdnQJIxmCX_w/edit?utm_content=DAGgwYxvgTU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 ## GitHub Repository
 
