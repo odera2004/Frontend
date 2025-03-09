@@ -100,14 +100,16 @@ export default function Login() {
         </p>
         <div className="text-center mt-4">
           <p>Or sign in with</p>
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              handleGoogleSignIn(credentialResponse.credential);
-            }}
-            onError={() => {
-              toast.error("Google Login failed.");
-            }}
-          />
+          <div className="d-flex justify-content-center">
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                handleGoogleSignIn(credentialResponse.credential);
+              }}
+              onError={() => {
+                toast.error("Google Login failed.");
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
