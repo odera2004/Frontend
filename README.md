@@ -1,6 +1,6 @@
 ### Car Service App
 
-### Date: 03/03/2025 By: Habsa Abdirizack Mohamed ,Eugine Odera,Melissa Kiptoo
+### Date: 03/03/2025 By: Habsa Abdirizack Mohamed, Eugine Odera, Melissa Kiptoo.
 
 ### Description
 
@@ -69,9 +69,14 @@ View the Source Code on GitHub - https://github.com/odera2004/Frontend
 
 ## App access
 
-The app(frontend)  has been deployed using CloudFlare and can be accesses through https://garage-automation.pages.dev/login
+The app has been deployed using CloudFlare and can be accessed through https://garage-automation.pages.dev/login
 
-The backend has also been deployed using Render to acces use - https://garage-7f3u.onrender.com
+The backend has also been deployed using Render at - https://garage-7f3u.onrender.com
+
+Admin login details - john.smith@gmail.com password 123456
+Employee login details - james.taylor@gmail.com password 123456
+
+N/B an admin promotes a normal user to employee status i.e for an employee to be added they initially need to register as user and then the admin can promote the user to either technician or security guard.
 
 ## Known Bugs
 
